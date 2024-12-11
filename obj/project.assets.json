@@ -5143,11 +5143,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-EstoqueClinica\\API - Clinica Estoque\\API - Clinica Estoque.csproj",
+      "projectUniqueName": "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-EstoqueClinica\\API - Clinica Estoque.csproj",
       "projectName": "API - Clinica Estoque",
-      "projectPath": "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-EstoqueClinica\\API - Clinica Estoque\\API - Clinica Estoque.csproj",
+      "projectPath": "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-EstoqueClinica\\API - Clinica Estoque.csproj",
       "packagesPath": "C:\\Users\\Rodrigo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-EstoqueClinica\\API - Clinica Estoque\\obj\\",
+      "outputPath": "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-EstoqueClinica\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Rodrigo\\AppData\\Roaming\\NuGet\\NuGet.Config"
