@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using API___Clinica_Estoque.Context;
 using API___Clinica_Estoque.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace API___Clinica_Estoque.Controller
 {
@@ -35,13 +36,38 @@ namespace API___Clinica_Estoque.Controller
 
             if (medicamentoBanco == null)
             {
-                return NotFound("Esse medicamento não existe! ");
+                return NotFound("Esse medicamento não existe no estoque! ");
             }
 
             else
             {
                 return Ok(medicamentoBanco);
             }
+        }
+
+        [HttpGet("nome")]
+        public IActionResult ObterPorNome(string nome)
+        {
+            var medicamentosBanco = _context.Medicamentos.Where(x => x.Nome.Contains(nome));
+
+            if (medicamentosBanco.IsNullOrEmpty())
+            {
+                return NotFound("Esse medicamento não existe no estoque! ");
+            }
+
+            else 
+            {
+                return Ok(medicamentosBanco);
+            }
+
+        }
+        
+
+        [HttpGet ("ObterTodos")]
+        public IActionResult ObterTodos()
+        {
+            var medicamentosBanco = _context.Medicamentos.Where(x => x.Nome.Contains(""));
+            return Ok(medicamentosBanco);
         }
 
         [HttpDelete("{Id}")]
@@ -51,7 +77,7 @@ namespace API___Clinica_Estoque.Controller
 
             if (medicamentoBanco == null)
             {
-                return NotFound("Esse medicamento não exite! ");
+                return NotFound("Esse medicamento não existe no estoque! ");
 
 
             }
@@ -60,18 +86,18 @@ namespace API___Clinica_Estoque.Controller
             {
                 _context.Medicamentos.Remove(medicamentoBanco);
                 _context.SaveChanges();
-                return Ok("Medicamento foi deletado! ");
+                return Ok("Medicamento foi deletado do estoque! ");
             } 
         }
 
-        [HttpPut("{Id}")]
+        [HttpPut]
         public IActionResult Atualizar (int Id, Medicamento medicamento)
         {
             var medicamentoBanco = _context.Medicamentos.Find(Id);
 
             if (medicamentoBanco == null)
             {
-                return NotFound("Esse medicamento não existe! ");
+                return NotFound("Esse medicamento não existe no estoque! ");
             }
 
             else

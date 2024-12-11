@@ -36,7 +36,7 @@ namespace API___Clinica_Estoque.Controller
 
             if (materialBanco == null)
             {
-                return NotFound("Esse material não existe! ");
+                return NotFound("Esse material não existe no estoque! ");
             }
 
             else
@@ -48,19 +48,28 @@ namespace API___Clinica_Estoque.Controller
         [HttpGet("nome")]
         public IActionResult ObterPorNome (string nome)
         {
-            var materiais = _context.Materiais.Where(x => x.Nome.Contains(nome));
+            var materiaisBanco = _context.Materiais.Where(x => x.Nome.Contains(nome));
 
             
-            if (materiais.IsNullOrEmpty())
+            if (materiaisBanco.IsNullOrEmpty())
             {
-                return NotFound("Esse material não existe!");
+                return NotFound("Esse material não existe no estoque! ");
             }
 
             else 
             {
-                return Ok(materiais);
+                return Ok(materiaisBanco);
             }
         }
+
+        [HttpGet("ObterTodos")]
+        public IActionResult ObterTodos ()
+        {
+            var materiaisBanco = _context.Materiais.Where(x => x.Nome.Contains(""));
+
+            return Ok(materiaisBanco);
+        }
+
 
 
         [HttpDelete("{id}")]
@@ -70,14 +79,14 @@ namespace API___Clinica_Estoque.Controller
 
             if (materialBanco == null)
             {
-                return NotFound("Esse material não exite!");
+                return NotFound("Esse material não existe no estoque! ");
             }
 
             else
             {
                 _context.Materiais.Remove(materialBanco);
                 _context.SaveChanges();
-                return Ok("Material foi excluido!");
+                return Ok("Material foi excluido do estoque! ");
             }
         }
 
@@ -88,7 +97,7 @@ namespace API___Clinica_Estoque.Controller
 
             if (materialBanco == null)
             {
-                return NotFound("Esse material não existe");
+                return NotFound("Esse material não existe no estoque! ");
             }
 
             else 
