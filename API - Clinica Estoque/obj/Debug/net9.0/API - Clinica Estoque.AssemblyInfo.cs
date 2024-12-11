@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("API - Clinica Estoque")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+965b4958d7c8bd0a355c46d0258d1de9fae30fdc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+35a49b53c527ed9474c5b9815ba68a6af86ed892")]
 [assembly: System.Reflection.AssemblyProductAttribute("API - Clinica Estoque")]
 [assembly: System.Reflection.AssemblyTitleAttribute("API - Clinica Estoque")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
