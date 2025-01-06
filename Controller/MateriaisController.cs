@@ -80,7 +80,7 @@ namespace API___Clinica_Estoque.Controller
                 return Ok(material);
             }
 
-            var materiaisBanco = await _context.Materiais.Where(x => x.Nome.Contains(nome)).ToListAsync();
+            var materiaisBanco = await _context.Materiais.AsNoTracking().Where(x => x.Nome.Contains(nome)).ToListAsync();
             Console.WriteLine(materiaisBanco);
 
             
@@ -97,7 +97,7 @@ namespace API___Clinica_Estoque.Controller
         [HttpGet("ObterTodos")]
         public async Task<IActionResult> ObterTodos ()
         {
-            var materiaisBanco = await _context.Materiais.Where(x => x.Nome.Contains("")).ToListAsync();
+            var materiaisBanco = await _context.Materiais.AsNoTracking().Where(x => x.Nome.Contains("")).ToListAsync();
 
             return Ok(materiaisBanco);
         }
