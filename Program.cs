@@ -1,4 +1,4 @@
-using API___Clinica_Estoque.Context;
+using API_ClinicStock.Context;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
 

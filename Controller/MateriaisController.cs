@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using API___Clinica_Estoque.Context;
+using API_ClinicStock.Context;
 using Microsoft.AspNetCore.Mvc;
-using API___Clinica_Estoque.Entities;
+using API_ClinicStock.Entities;
 using Microsoft.IdentityModel.Tokens;
 using StackExchange.Redis;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 
-namespace API___Clinica_Estoque.Controller
+namespace API_ClinicStock.Controller
 {
     [ApiController]
     [Route("[controller]")]

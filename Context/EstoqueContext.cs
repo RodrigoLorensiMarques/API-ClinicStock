@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using API___Clinica_Estoque.Entities;
+using API_ClinicStock.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace API___Clinica_Estoque.Context
+namespace API_ClinicStock.Context
 {
     public class EstoqueContext : DbContext
     {

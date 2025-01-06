@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace API___Clinica_Estoque.Migrations
+namespace API_ClinicStock.Migrations
 {
     /// <inheritdoc />
     public partial class InicialMigrations : Migration

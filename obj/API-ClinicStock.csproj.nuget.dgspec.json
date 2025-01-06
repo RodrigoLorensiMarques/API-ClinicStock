@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-ClinicStock\\API - Clinica Estoque.csproj": {}
+    "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-ClinicStock\\API-ClinicStock.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-ClinicStock\\API - Clinica Estoque.csproj": {
+    "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-ClinicStock\\API-ClinicStock.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-ClinicStock\\API - Clinica Estoque.csproj",
-        "projectName": "API - Clinica Estoque",
-        "projectPath": "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-ClinicStock\\API - Clinica Estoque.csproj",
+        "projectUniqueName": "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-ClinicStock\\API-ClinicStock.csproj",
+        "projectName": "API-ClinicStock",
+        "projectPath": "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-ClinicStock\\API-ClinicStock.csproj",
         "packagesPath": "C:\\Users\\Rodrigo\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-ClinicStock\\obj\\",
         "projectStyle": "PackageReference",

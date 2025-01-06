@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API - Clinica Estoque", "API - Clinica Estoque.csproj", "{C6BD0D15-6611-4B8F-95D6-BFEC3238B4C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API-ClinicStock", "API-ClinicStock.csproj", "{C6BD0D15-6611-4B8F-95D6-BFEC3238B4C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

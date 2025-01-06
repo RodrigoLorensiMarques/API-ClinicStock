@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using API___Clinica_Estoque.Context;
-using API___Clinica_Estoque.Entities;
+using API_ClinicStock.Context;
+using API_ClinicStock.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
-namespace API___Clinica_Estoque.Controller
+namespace Api_ClinicStock.Controller
 {
     [ApiController]
     [Route("[controller]")]
