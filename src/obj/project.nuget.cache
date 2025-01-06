@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VkN8CfztjKs=",
+  "dgSpecHash": "0gt0u7N7i0w=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-ClinicStock\\API-ClinicStock.csproj",
+  "projectFilePath": "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-ClinicStock\\src\\API-ClinicStock.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Rodrigo\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Rodrigo\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

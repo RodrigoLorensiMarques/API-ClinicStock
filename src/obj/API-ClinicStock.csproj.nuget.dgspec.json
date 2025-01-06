@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-ClinicStock\\API-ClinicStock.csproj": {}
+    "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-ClinicStock\\src\\API-ClinicStock.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-ClinicStock\\API-ClinicStock.csproj": {
+    "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-ClinicStock\\src\\API-ClinicStock.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-ClinicStock\\API-ClinicStock.csproj",
+        "projectUniqueName": "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-ClinicStock\\src\\API-ClinicStock.csproj",
         "projectName": "API-ClinicStock",
-        "projectPath": "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-ClinicStock\\API-ClinicStock.csproj",
+        "projectPath": "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-ClinicStock\\src\\API-ClinicStock.csproj",
         "packagesPath": "C:\\Users\\Rodrigo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-ClinicStock\\obj\\",
+        "outputPath": "C:\\Users\\Rodrigo\\Documents\\GitHub\\API-ClinicStock\\src\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Rodrigo\\AppData\\Roaming\\NuGet\\NuGet.Config"
