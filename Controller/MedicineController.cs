@@ -29,131 +29,172 @@ namespace Api_ClinicStock.Controller
         [HttpPost]
         public async Task<IActionResult> Create (Medicine medicine)
         {
-            _context.Medicines.Add(medicine);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Medicines.Add(medicine);
+                await _context.SaveChangesAsync();
 
-            var dbCache = _cache.GetDatabase();
-            var cacheKey = $"Medicine:{medicine.Id}";
-            var medicineSerialized = JsonSerializer.Serialize<Medicine>(medicine);
-            await dbCache.StringSetAsync(cacheKey,medicineSerialized,TimeSpan.FromMinutes(10));
+                var dbCache = _cache.GetDatabase();
+                var cacheKey = $"Medicine:{medicine.Id}";
+                var medicineSerialized = JsonSerializer.Serialize<Medicine>(medicine);
+                await dbCache.StringSetAsync(cacheKey,medicineSerialized,TimeSpan.FromMinutes(10));
 
-            return Ok(medicine);
+                return Ok(medicine);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "01X50 - Ocorreu um erro interno ao processar sua solicitação");
+            }
         }
         
         [HttpGet("{Id}")]
         public async Task<IActionResult> GetById (int Id)
         {
-            var dbCache = _cache.GetDatabase();
-            var cacheKey = $"Medicine:{Id}";
-
-            var medicineCache = await dbCache.StringGetAsync(cacheKey);
-
-            if (!medicineCache.IsNullOrEmpty)
+            try
             {
-                var medicine = JsonSerializer.Deserialize<Medicine>(medicineCache);
-                return Ok(medicine);
+                var dbCache = _cache.GetDatabase();
+                var cacheKey = $"Medicine:{Id}";
+
+                var medicineCache = await dbCache.StringGetAsync(cacheKey);
+
+                if (!medicineCache.IsNullOrEmpty)
+                {
+                    var medicine = JsonSerializer.Deserialize<Medicine>(medicineCache);
+                    return Ok(medicine);
+                }
+
+                var medicineDb = await _context.Medicines.FirstOrDefaultAsync(x => x.Id == Id);
+
+                if (medicineDb == null)
+                {
+                    return NotFound("Esse medicamento não existe no estoque! ");
+                }
+
+                var medicineSerialized = JsonSerializer.Serialize<Medicine>(medicineDb);
+                await dbCache.StringSetAsync(cacheKey, medicineSerialized, TimeSpan.FromMinutes(10));
+                return Ok(medicineDb);
             }
-
-            var medicineDb = await _context.Medicines.FirstOrDefaultAsync(x => x.Id == Id);
-
-            if (medicineDb == null)
+            catch (Exception)
             {
-                return NotFound("Esse medicamento não existe no estoque! ");
+                return StatusCode(500,"01X51 - Ocorreu um erro interno ao processar sua solicitação");
             }
-
-            var medicineSerialized = JsonSerializer.Serialize<Medicine>(medicineDb);
-            await dbCache.StringSetAsync(cacheKey, medicineSerialized, TimeSpan.FromMinutes(10));
-            return Ok(medicineDb);
         }
 
         [HttpGet("name")]
         public async Task<IActionResult> GetByName(string name)
         {
-            var dbCache = _cache.GetDatabase();
-            var cacheKey = $"Madicine:{name}";
-
-            var medicineCache = await dbCache.StringGetAsync(cacheKey);
-
-            if (!medicineCache.IsNullOrEmpty)
+            try
             {
-                var medicine = JsonSerializer.Deserialize<Medicine>(medicineCache);
-                return Ok(medicine);
+                var dbCache = _cache.GetDatabase();
+                var cacheKey = $"Madicine:{name}";
+
+                var medicineCache = await dbCache.StringGetAsync(cacheKey);
+
+                if (!medicineCache.IsNullOrEmpty)
+                {
+                    var medicine = JsonSerializer.Deserialize<Medicine>(medicineCache);
+                    return Ok(medicine);
+                }
+
+                var medicineDb = await _context.Medicines.Where(x => x.Name.Contains(name)).ToListAsync();
+
+                if (medicineDb.IsNullOrEmpty())
+                {
+                    return NotFound("Esse medicamento não existe no estoque! ");
+                }
+
+                var medicineSerialized = JsonSerializer.Serialize<List<Medicine>>(medicineDb);
+                await dbCache.StringSetAsync(cacheKey, medicineSerialized, TimeSpan.FromMinutes(10));
+                return Ok(medicineDb);
             }
-
-            var medicineDb = await _context.Medicines.Where(x => x.Name.Contains(name)).ToListAsync();
-
-            if (medicineDb.IsNullOrEmpty())
+            catch (Exception)
             {
-                return NotFound("Esse medicamento não existe no estoque! ");
+                return StatusCode(500, "01X52 - Ocorreu um erro interno ao processar sua solicitação");
             }
-
-
-            var medicineSerialized = JsonSerializer.Serialize<List<Medicine>>(medicineDb);
-            await dbCache.StringSetAsync(cacheKey, medicineSerialized, TimeSpan.FromMinutes(10));
-            return Ok(medicineDb);
         }
         
         [HttpGet ("GetAll")]
         public async Task<IActionResult> GetAll()
         {
-            var medicinesDb = await _context.Medicines.ToListAsync();
-            return Ok(medicinesDb);
+            try
+            {
+                var medicinesDb = await _context.Medicines.ToListAsync();
+                return Ok(medicinesDb);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500,"01X53 - Ocorreu um erro interno ao processar sua solicitação");
+            }
         }
 
         [HttpDelete("{Id}")]
         public async Task<IActionResult> Delete (int Id)
         {
-            var medicineDb = await _context.Medicines.FirstOrDefaultAsync(x => x.Id == Id);
-
-            if (medicineDb == null)
+            try
             {
-                return NotFound("Esse medicamento não existe no estoque! ");
+                var medicineDb = await _context.Medicines.FirstOrDefaultAsync(x => x.Id == Id);
+
+                if (medicineDb == null)
+                {
+                    return NotFound("Esse medicamento não existe no estoque! ");
+                }
+
+                _context.Medicines.Remove(medicineDb);
+                await _context.SaveChangesAsync();
+
+                var dbCache = _cache.GetDatabase();
+                var cacheKey = $"Medicine:{Id}";
+                await dbCache.KeyDeleteAsync(cacheKey);
+
+                return Ok("Medicamento foi deletado do estoque! ");
             }
-
-            _context.Medicines.Remove(medicineDb);
-            await _context.SaveChangesAsync();
-
-            var dbCache = _cache.GetDatabase();
-            var cacheKey = $"Medicine:{Id}";
-            await dbCache.KeyDeleteAsync(cacheKey);
-
-            return Ok("Medicamento foi deletado do estoque! ");
+            catch (Exception)
+            {
+                return StatusCode(500, "01X54 - Ocorreu um erro interno ao processar sua solicitação");
+            }
             
         }
 
         [HttpPut]
         public async Task<IActionResult> Update (int Id, Medicine medicine)
         {
-            var medicineDb = await _context.Medicines.FirstOrDefaultAsync(x => x.Id == Id);
-
-            if (medicineDb == null)
+            try
             {
-                return NotFound("Esse medicamento não existe no estoque! ");
-            }
+                var medicineDb = await _context.Medicines.FirstOrDefaultAsync(x => x.Id == Id);
 
-            medicineDb.Name = medicine.Name;
-            medicineDb.Milligram = medicine.Milligram;
-            medicineDb.Packaging = medicine.Packaging;
-            medicineDb.Amount = medicine.Amount;
+                if (medicineDb == null)
+                {
+                    return NotFound("Esse medicamento não existe no estoque! ");
+                }
 
-            _context.Medicines.Update(medicineDb);
-            await _context.SaveChangesAsync();
+                medicineDb.Name = medicine.Name;
+                medicineDb.Milligram = medicine.Milligram;
+                medicineDb.Packaging = medicine.Packaging;
+                medicineDb.Amount = medicine.Amount;
 
-            var medicineSerialized = JsonSerializer.Serialize<Medicine>(medicineDb);
+                _context.Medicines.Update(medicineDb);
+                await _context.SaveChangesAsync();
 
-            var dbCache = _cache.GetDatabase();
-            var cacheKey = $"Medicine:{Id}";
-            var medicineCache = await dbCache.StringGetAsync(cacheKey);
-            
-            if (!medicineCache.IsNullOrEmpty)
-            {   
-                await dbCache.KeyDeleteAsync(cacheKey);
+                var medicineSerialized = JsonSerializer.Serialize<Medicine>(medicineDb);
+
+                var dbCache = _cache.GetDatabase();
+                var cacheKey = $"Medicine:{Id}";
+                var medicineCache = await dbCache.StringGetAsync(cacheKey);
+                
+                if (!medicineCache.IsNullOrEmpty)
+                {   
+                    await dbCache.KeyDeleteAsync(cacheKey);
+                    await dbCache.StringSetAsync(cacheKey,medicineSerialized,TimeSpan.FromMinutes(10));
+                    return Ok(medicineDb);
+                }
+
                 await dbCache.StringSetAsync(cacheKey,medicineSerialized,TimeSpan.FromMinutes(10));
-                return Ok(medicineDb);
+                return Ok(medicineDb);  
             }
-
-            await dbCache.StringSetAsync(cacheKey,medicineSerialized,TimeSpan.FromMinutes(10));
-            return Ok(medicineDb);            
+            catch (Exception)
+            {
+                return StatusCode(500,"01X55 - Ocorreu um erro interno ao processar sua solicitação");
+            }
         }
     }
 }

@@ -29,131 +29,173 @@ namespace API_ClinicStock.Controller
         [HttpPost]
         public async Task<IActionResult> Create(Material material)
         {
-            _context.Add(material);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Add(material);
+                await _context.SaveChangesAsync();
 
-            var dbCache = _cache.GetDatabase();
-            var materialSerialized = JsonSerializer.Serialize<Material>(material);
-            var cacheKey = $"Material:{material.Id}";
+                var dbCache = _cache.GetDatabase();
+                var materialSerialized = JsonSerializer.Serialize<Material>(material);
+                var cacheKey = $"Material:{material.Id}";
 
-            await dbCache.StringSetAsync(cacheKey, materialSerialized, TimeSpan.FromMinutes(10));
-            return Ok(material);
+                await dbCache.StringSetAsync(cacheKey, materialSerialized, TimeSpan.FromMinutes(10));
+                return Ok(material);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "01X35 - Ocorreu um erro interno ao processar sua solicitação");
+            }
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var dbCache = _cache.GetDatabase();
-
-            var cacheKey = $"material:{id}";
-            var materialCache = await dbCache.StringGetAsync(cacheKey);
-
-            if (!materialCache.IsNullOrEmpty)
+            try
             {
-                var material = JsonSerializer.Deserialize<Material>(materialCache);
-                return Ok(material);
+                var dbCache = _cache.GetDatabase();
+
+                var cacheKey = $"material:{id}";
+                var materialCache = await dbCache.StringGetAsync(cacheKey);
+
+                if (!materialCache.IsNullOrEmpty)
+                {
+                    var material = JsonSerializer.Deserialize<Material>(materialCache);
+                    return Ok(material);
+                }
+
+                var materialDb = await _context.Materials.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+
+                if (materialDb == null)
+                {
+                    return NotFound("Esse material não existe no estoque! ");
+                }
+
+                var serializedMaterial = JsonSerializer.Serialize<Material>(materialDb);
+                await dbCache.StringSetAsync(cacheKey, serializedMaterial, TimeSpan.FromMinutes(10));
+                return Ok(materialDb);
             }
-
-            var materialDb = await _context.Materials.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
-
-            if (materialDb == null)
+            catch (Exception)
             {
-                return NotFound("Esse material não existe no estoque! ");
+                return StatusCode(500, "01X36 - Ocorreu um erro interno ao processar sua solicitação");
             }
-
-            var serializedMaterial = JsonSerializer.Serialize<Material>(materialDb);
-            await dbCache.StringSetAsync(cacheKey, serializedMaterial, TimeSpan.FromMinutes(10));
-            return Ok(materialDb);
         }
 
         [HttpGet("name")]
         public async Task<IActionResult> GetByName (string name)
         {
-            var dbCache = _cache.GetDatabase();
-            var cacheName = $"Material:{name}";
-
-            var materialCache = await dbCache.StringGetAsync(cacheName);
-
-            if (!materialCache.IsNullOrEmpty)
+            try
             {
-                var material = JsonSerializer.Deserialize<Material>(materialCache);
-                return Ok(material);
-            }
+                var dbCache = _cache.GetDatabase();
+                var cacheName = $"Material:{name}";
 
-            var materialDb = await _context.Materials.AsNoTracking().Where(x => x.Name.Contains(name)).ToListAsync();
-            Console.WriteLine(materialDb);
-            
-            if (materialDb.IsNullOrEmpty())
+                var materialCache = await dbCache.StringGetAsync(cacheName);
+
+                if (!materialCache.IsNullOrEmpty)
+                {
+                    var material = JsonSerializer.Deserialize<Material>(materialCache);
+                    return Ok(material);
+                }
+
+                var materialDb = await _context.Materials.AsNoTracking().Where(x => x.Name.Contains(name)).ToListAsync();
+                Console.WriteLine(materialDb);
+                
+                if (materialDb.IsNullOrEmpty())
+                {
+                    return NotFound("Não existe material com esse nome no estoque! ");
+                }
+
+                var serializedMaterial = JsonSerializer.Serialize<List<Material>>(materialDb);
+                await dbCache.StringSetAsync(cacheName, serializedMaterial, TimeSpan.FromMinutes(10));
+                return Ok(materialDb);
+            }
+            catch (Exception)
             {
-                return NotFound("Não existe material com esse nome no estoque! ");
+                return StatusCode(500,"01X37 - Ocorreu um erro interno ao processar sua solicitação");
             }
-
-            var serializedMaterial = JsonSerializer.Serialize<List<Material>>(materialDb);
-            await dbCache.StringSetAsync(cacheName, serializedMaterial, TimeSpan.FromMinutes(10));
-            return Ok(materialDb);
         }
 
         [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll ()
+        public async Task<IActionResult> GetAll()
         {
-            var materialsDb = await _context.Materials.AsNoTracking().Where(x => x.Name.Contains("")).ToListAsync();
+            try
+            {
+                var materialsDb = await _context.Materials.AsNoTracking().ToListAsync();
+                return Ok(materialsDb);
+            }
+            catch (Exception)
+            {
 
-            return Ok(materialsDb);
+                return StatusCode(500, "01X38 - Ocorreu um erro interno ao processar sua solicitação");
+            }
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete (int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var materialDb = await _context.Materials.FirstOrDefaultAsync(x => x.Id == id);
-
-            if (materialDb == null)
+            try
             {
-                return NotFound("Esse material não existe no estoque! ");
+                var materialDb = await _context.Materials.FirstOrDefaultAsync(x => x.Id == id);
+
+                if (materialDb == null)
+                {
+                    return NotFound("Esse material não existe no estoque! ");
+                }
+
+                _context.Materials.Remove(materialDb);
+                await _context.SaveChangesAsync();
+
+                var dbCache = _cache.GetDatabase();
+                var cacheKey = $"material:{id}";
+                await dbCache.KeyDeleteAsync(cacheKey);
+
+                return Ok("Material foi excluido do estoque! "); 
             }
-
-            _context.Materials.Remove(materialDb);
-            await _context.SaveChangesAsync();
-
-            var dbCache = _cache.GetDatabase();
-            var cacheKey = $"material:{id}";
-            await dbCache.KeyDeleteAsync(cacheKey);
-
-            return Ok("Material foi excluido do estoque! ");    
+            catch (Exception)
+            {
+                return StatusCode(500, "01X39 - Ocorreu um erro interno ao processar sua solicitação");
+            }
         }
 
         [HttpPut]
         public async Task<IActionResult> Update(int id, Material material)
         {
-            var materialDb = await _context.Materials.FirstOrDefaultAsync(x => x.Id == id);
-
-            if (materialDb == null)
+            try
             {
-                return NotFound("Esse material não existe no estoque! ");
-            }
+                var materialDb = await _context.Materials.FirstOrDefaultAsync(x => x.Id == id);
 
-            materialDb.Name = material.Name;
-            materialDb.Packaging = material.Packaging;
-            materialDb.Amount = material.Amount;
+                if (materialDb == null)
+                {
+                    return NotFound("Esse material não existe no estoque! ");
+                }
 
-            _context.Materials.Update(materialDb);
-            await _context.SaveChangesAsync();
+                materialDb.Name = material.Name;
+                materialDb.Packaging = material.Packaging;
+                materialDb.Amount = material.Amount;
 
-            var materialSerialized = JsonSerializer.Serialize<Material>(materialDb);
+                _context.Materials.Update(materialDb);
+                await _context.SaveChangesAsync();
 
-            var dbCache = _cache.GetDatabase();
-            var cacheKey = $"material:{id}";
+                var materialSerialized = JsonSerializer.Serialize<Material>(materialDb);
 
-            var materialCache = await dbCache.StringGetAsync(cacheKey);
+                var dbCache = _cache.GetDatabase();
+                var cacheKey = $"material:{id}";
 
-            if (!materialCache.IsNullOrEmpty)
-            {
-                await dbCache.KeyDeleteAsync(cacheKey);
+                var materialCache = await dbCache.StringGetAsync(cacheKey);
+
+                if (!materialCache.IsNullOrEmpty)
+                {
+                    await dbCache.KeyDeleteAsync(cacheKey);
+                    await dbCache.StringSetAsync(cacheKey, materialSerialized, TimeSpan.FromMinutes(10));
+                    return Ok(materialDb);
+                }
+
                 await dbCache.StringSetAsync(cacheKey, materialSerialized, TimeSpan.FromMinutes(10));
                 return Ok(materialDb);
             }
-
-            await dbCache.StringSetAsync(cacheKey, materialSerialized, TimeSpan.FromMinutes(10));
-            return Ok(materialDb);
+            catch (Exception)
+            {
+                return StatusCode(500,"01X40 - Ocorreu um erro interno ao processar sua solicitação");
+            }
         }
 
     }
