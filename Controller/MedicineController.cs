@@ -1,11 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using API_ClinicStock.Context;
 using API_ClinicStock.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using StackExchange.Redis;
 
 namespace Api_ClinicStock.Controller
 {
@@ -14,99 +18,142 @@ namespace Api_ClinicStock.Controller
     public class MedicineController : ControllerBase
     {
         private readonly StockContext _context;
+        private readonly IConnectionMultiplexer _cache;
 
-        public MedicineController(StockContext context)
+        public MedicineController(StockContext context, IConnectionMultiplexer cache)
         {
             _context = context;
+            _cache = cache;
         }
 
         [HttpPost]
-        public IActionResult Create (Medicine medicine)
+        public async Task<IActionResult> Create (Medicine medicine)
         {
             _context.Medicines.Add(medicine);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
+
+            var dbCache = _cache.GetDatabase();
+            var cacheKey = $"Medicine:{medicine.Id}";
+            var medicineSerialized = JsonSerializer.Serialize<Medicine>(medicine);
+            await dbCache.StringSetAsync(cacheKey,medicineSerialized,TimeSpan.FromMinutes(10));
+
             return Ok(medicine);
         }
         
-
         [HttpGet("{Id}")]
-        public IActionResult  GetById (int Id)
+        public async Task<IActionResult> GetById (int Id)
         {
-            var medicineDb = _context.Medicines.Find(Id);
+            var dbCache = _cache.GetDatabase();
+            var cacheKey = $"Medicine:{Id}";
+
+            var medicineCache = await dbCache.StringGetAsync(cacheKey);
+
+            if (!medicineCache.IsNullOrEmpty)
+            {
+                var medicine = JsonSerializer.Deserialize<Medicine>(medicineCache);
+                return Ok(medicine);
+            }
+
+            var medicineDb = await _context.Medicines.FirstOrDefaultAsync(x => x.Id == Id);
 
             if (medicineDb == null)
             {
                 return NotFound("Esse medicamento não existe no estoque! ");
             }
 
-            else
-            {
-                return Ok(medicineDb);
-            }
+            var medicineSerialized = JsonSerializer.Serialize<Medicine>(medicineDb);
+            await dbCache.StringSetAsync(cacheKey, medicineSerialized, TimeSpan.FromMinutes(10));
+            return Ok(medicineDb);
         }
 
         [HttpGet("name")]
-        public IActionResult GetByName(string name)
+        public async Task<IActionResult> GetByName(string name)
         {
-            var medicineDb = _context.Medicines.Where(x => x.Name.Contains(name));
+            var dbCache = _cache.GetDatabase();
+            var cacheKey = $"Madicine:{name}";
+
+            var medicineCache = await dbCache.StringGetAsync(cacheKey);
+
+            if (!medicineCache.IsNullOrEmpty)
+            {
+                var medicine = JsonSerializer.Deserialize<Medicine>(medicineCache);
+                return Ok(medicine);
+            }
+
+            var medicineDb = await _context.Medicines.Where(x => x.Name.Contains(name)).ToListAsync();
 
             if (medicineDb.IsNullOrEmpty())
             {
                 return NotFound("Esse medicamento não existe no estoque! ");
             }
 
-            else 
-            {
-                return Ok(medicineDb);
-            }
+
+            var medicineSerialized = JsonSerializer.Serialize<List<Medicine>>(medicineDb);
+            await dbCache.StringSetAsync(cacheKey, medicineSerialized, TimeSpan.FromMinutes(10));
+            return Ok(medicineDb);
         }
         
-
         [HttpGet ("GetAll")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var medicinesDb = _context.Medicines.Where(x => x.Name.Contains(""));
+            var medicinesDb = await _context.Medicines.ToListAsync();
             return Ok(medicinesDb);
         }
 
         [HttpDelete("{Id}")]
-        public IActionResult Delete (int Id)
+        public async Task<IActionResult> Delete (int Id)
         {
-            var medicineDb = _context.Medicines.Find(Id);
+            var medicineDb = await _context.Medicines.FirstOrDefaultAsync(x => x.Id == Id);
 
             if (medicineDb == null)
             {
                 return NotFound("Esse medicamento não existe no estoque! ");
             }
 
-            else
-            {
-                _context.Medicines.Remove(medicineDb);
-                _context.SaveChanges();
-                return Ok("Medicamento foi deletado do estoque! ");
-            } 
+            _context.Medicines.Remove(medicineDb);
+            await _context.SaveChangesAsync();
+
+            var dbCache = _cache.GetDatabase();
+            var cacheKey = $"Medicine:{Id}";
+            await dbCache.KeyDeleteAsync(cacheKey);
+
+            return Ok("Medicamento foi deletado do estoque! ");
+            
         }
 
         [HttpPut]
-        public IActionResult Update (int Id, Medicine medicine)
+        public async Task<IActionResult> Update (int Id, Medicine medicine)
         {
-            var medicineDb = _context.Medicines.Find(Id);
+            var medicineDb = await _context.Medicines.FirstOrDefaultAsync(x => x.Id == Id);
 
             if (medicineDb == null)
             {
                 return NotFound("Esse medicamento não existe no estoque! ");
             }
 
-            else
-            {
-                medicineDb.Name = medicine.Name;
-                medicineDb.Milligram = medicine.Milligram;
-                medicineDb.Packaging = medicine.Packaging;
-                medicineDb.Amount = medicine.Amount;
+            medicineDb.Name = medicine.Name;
+            medicineDb.Milligram = medicine.Milligram;
+            medicineDb.Packaging = medicine.Packaging;
+            medicineDb.Amount = medicine.Amount;
 
-                _context.SaveChanges();
+            _context.Medicines.Update(medicineDb);
+            await _context.SaveChangesAsync();
+
+            var medicineSerialized = JsonSerializer.Serialize<Medicine>(medicineDb);
+
+            var dbCache = _cache.GetDatabase();
+            var cacheKey = $"Medicine:{Id}";
+            var medicineCache = await dbCache.StringGetAsync(cacheKey);
+            
+            if (!medicineCache.IsNullOrEmpty)
+            {   
+                await dbCache.KeyDeleteAsync(cacheKey);
+                await dbCache.StringSetAsync(cacheKey,medicineSerialized,TimeSpan.FromMinutes(10));
                 return Ok(medicineDb);
             }
+
+            await dbCache.StringSetAsync(cacheKey,medicineSerialized,TimeSpan.FromMinutes(10));
+            return Ok(medicineDb);            
         }
     }
 }
