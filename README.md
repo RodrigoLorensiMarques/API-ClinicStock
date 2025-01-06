@@ -12,12 +12,12 @@ Utiliza armazenamento de dados frequentes em cache para aumentar a performance r
 
 ## API Endpoints
 ### Materials
-- __POST /Materials:__ Adiciona um novo material.
-- __PUT /Materials:__ Edita um material pelo ID.
-- __GET /Materials{Id}:__ Recupera um material pelo ID.
-- __DELETE /Materials{Id}:__ Deleta um material pelo ID.
-- __GET /Materials/name:__ Recupera um material pelo nome.
-- __GET /Materials/GetAll:__  Recupera todos os materiais.
+- __POST /Material:__ Adiciona um novo material.
+- __PUT /Material:__ Edita um material pelo ID.
+- __GET /Material{Id}:__ Recupera um material pelo ID.
+- __DELETE /Material{Id}:__ Deleta um material pelo ID.
+- __GET /Material/name:__ Recupera um material pelo nome.
+- __GET /Material/GetAll:__  Recupera todos os materiais.
 
 
 ### Medicines
