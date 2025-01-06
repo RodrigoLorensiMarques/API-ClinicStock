@@ -15,12 +15,12 @@ namespace API_ClinicStock.Controller
 {
     [ApiController]
     [Route("[controller]")]
-    public class MaterialsController : ControllerBase
+    public class MaterialController : ControllerBase
     {
         private readonly StockContext _context;
         private readonly IConnectionMultiplexer _cache;
 
-        public MaterialsController(StockContext context, IConnectionMultiplexer cache)
+        public MaterialController(StockContext context, IConnectionMultiplexer cache)
         {   
             _context = context;
             _cache = cache;

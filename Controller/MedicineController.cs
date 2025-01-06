@@ -83,8 +83,8 @@ namespace Api_ClinicStock.Controller
         [HttpGet("name")]
         public async Task<IActionResult> GetByName(string name)
         {
-            try
-            {
+             try
+             {
                 var dbCache = _cache.GetDatabase();
                 var cacheKey = $"Madicine:{name}";
 
@@ -92,7 +92,7 @@ namespace Api_ClinicStock.Controller
 
                 if (!medicineCache.IsNullOrEmpty)
                 {
-                    var medicine = JsonSerializer.Deserialize<Medicine>(medicineCache);
+                    var medicine = JsonSerializer.Deserialize<List<Medicine>>(medicineCache);
                     return Ok(medicine);
                 }
 
@@ -109,7 +109,7 @@ namespace Api_ClinicStock.Controller
             }
             catch (Exception)
             {
-                return StatusCode(500, "01X52 - Ocorreu um erro interno ao processar sua solicitação");
+                 return StatusCode(500, "01X52 - Ocorreu um erro interno ao processar sua solicitação");
             }
         }
         
