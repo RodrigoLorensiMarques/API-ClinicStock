@@ -9,9 +9,10 @@ Utiliza armazenamento de dados frequentes em cache para aumentar a performance r
 - SQL Server
 - Redis
 - Docker
+- Swagger
 
 ## API Endpoints
-### Materials
+### Material
 - __POST /Material:__ Adiciona um novo material.
 - __PUT /Material:__ Edita um material pelo ID.
 - __GET /Material{Id}:__ Recupera um material pelo ID.
@@ -20,10 +21,15 @@ Utiliza armazenamento de dados frequentes em cache para aumentar a performance r
 - __GET /Material/GetAll:__  Recupera todos os materiais.
 
 
-### Medicines
+### Medicine
 - __POST /Medicine:__ Adiciona um novo medicamento.
 - __PUT /Medicine:__ Edita um medicamento pelo ID.
 - __GET /Medicine{Id}:__ Recupera um medicamento pelo ID.
 - __DELETE /Medicine{Id}:__ Deleta um medicamento pelo ID.
 - __GET /Medicine/name:__ Recupera um medicamento pelo nome.
 - __GET /Medicine/GetAll:__  Recupera todos os medicamentos.
+
+
+## Como Rodar
+### Requisitos:
+
