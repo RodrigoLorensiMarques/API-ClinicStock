@@ -471,3 +471,5 @@ C:\Users\Rodrigo\Documents\GitHub\API-EstoqueClinica\obj\Debug\net9.0\refint\API
 C:\Users\Rodrigo\Documents\GitHub\API-EstoqueClinica\obj\Debug\net9.0\API - Clinica Estoque.pdb
 C:\Users\Rodrigo\Documents\GitHub\API-EstoqueClinica\obj\Debug\net9.0\API - Clinica Estoque.genruntimeconfig.cache
 C:\Users\Rodrigo\Documents\GitHub\API-EstoqueClinica\obj\Debug\net9.0\ref\API - Clinica Estoque.dll
+C:\Users\Rodrigo\Documents\GitHub\API-EstoqueClinica\bin\Debug\net9.0\Pipelines.Sockets.Unofficial.dll
+C:\Users\Rodrigo\Documents\GitHub\API-EstoqueClinica\bin\Debug\net9.0\StackExchange.Redis.dll
