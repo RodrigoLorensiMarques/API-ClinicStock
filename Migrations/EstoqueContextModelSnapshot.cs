@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API_ClinicStock.Migrations
 {
-    [DbContext(typeof(EstoqueContext))]
+    [DbContext(typeof(StockContext))]
     partial class EstoqueContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace API_ClinicStock.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("API___Clinica_Estoque.Entities.Materiais", b =>
+            modelBuilder.Entity("API_ClinicStock.Entities.Material", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -29,23 +29,23 @@ namespace API_ClinicStock.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Embalagem")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Quantidade")
+                    b.Property<int>("Amount")
                         .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Packaging")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Materiais");
+                    b.ToTable("Materials");
                 });
 
-            modelBuilder.Entity("API___Clinica_Estoque.Entities.Medicamentos", b =>
+            modelBuilder.Entity("API_ClinicStock.Entities.Medicine", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -53,23 +53,23 @@ namespace API_ClinicStock.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Embalagem")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
 
-                    b.Property<decimal>("Miligrama")
+                    b.Property<decimal>("Milligram")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Quantidade")
-                        .HasColumnType("int");
+                    b.Property<string>("Packaging")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Medicamentos");
+                    b.ToTable("Medicines");
                 });
 #pragma warning restore 612, 618
         }

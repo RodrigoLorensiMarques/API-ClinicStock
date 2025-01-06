@@ -9,7 +9,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-builder.Services.AddDbContext<EstoqueContext>(options => 
+builder.Services.AddDbContext<StockContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConexaoPadrao")));
 
 builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>

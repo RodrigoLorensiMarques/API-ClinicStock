@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace API_ClinicStock.Entities
 {
-    public class Material
+    public class Medicine
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public decimal Milligram { get; set; }
         public string Packaging { get; set; }
         public int Amount { get; set; }
     }

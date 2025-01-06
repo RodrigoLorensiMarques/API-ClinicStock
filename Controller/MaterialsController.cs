@@ -15,12 +15,12 @@ namespace API_ClinicStock.Controller
 {
     [ApiController]
     [Route("[controller]")]
-    public class MateriaisController : ControllerBase
+    public class MaterialsController : ControllerBase
     {
-        private readonly EstoqueContext _context;
+        private readonly StockContext _context;
         private readonly IConnectionMultiplexer _cache;
 
-        public MateriaisController(EstoqueContext context, IConnectionMultiplexer cache)
+        public MaterialsController(StockContext context, IConnectionMultiplexer cache)
         {   
             _context = context;
             _cache = cache;
@@ -41,7 +41,7 @@ namespace API_ClinicStock.Controller
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> ObterPorId(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             var dbCache = _cache.GetDatabase();
 
@@ -54,23 +54,23 @@ namespace API_ClinicStock.Controller
                 return Ok(material);
             }
 
-            var materialBanco = await _context.Materiais.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            var materialDb = await _context.Materials.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
 
-            if (materialBanco == null)
+            if (materialDb == null)
             {
                 return NotFound("Esse material não existe no estoque! ");
             }
 
-            var serializedMaterial = JsonSerializer.Serialize<Material>(materialBanco);
+            var serializedMaterial = JsonSerializer.Serialize<Material>(materialDb);
             await dbCache.StringSetAsync(cacheKey, serializedMaterial, TimeSpan.FromMinutes(10));
-            return Ok(materialBanco);
+            return Ok(materialDb);
         }
 
-        [HttpGet("nome")]
-        public async Task<IActionResult> ObterPorNome (string nome)
+        [HttpGet("name")]
+        public async Task<IActionResult> GetByName (string name)
         {
             var dbCache = _cache.GetDatabase();
-            var cacheName = $"Material:{nome}";
+            var cacheName = $"Material:{name}";
 
             var materialCache = await dbCache.StringGetAsync(cacheName);
 
@@ -80,39 +80,38 @@ namespace API_ClinicStock.Controller
                 return Ok(material);
             }
 
-            var materiaisBanco = await _context.Materiais.AsNoTracking().Where(x => x.Nome.Contains(nome)).ToListAsync();
-            Console.WriteLine(materiaisBanco);
-
+            var materialDb = await _context.Materials.AsNoTracking().Where(x => x.Name.Contains(name)).ToListAsync();
+            Console.WriteLine(materialDb);
             
-            if (materiaisBanco.IsNullOrEmpty())
+            if (materialDb.IsNullOrEmpty())
             {
-                return NotFound("Esse material não existe no estoque! ");
+                return NotFound("Não existe material com esse nome no estoque! ");
             }
 
-            var serializedMaterial = JsonSerializer.Serialize<List<Material>>(materiaisBanco);
+            var serializedMaterial = JsonSerializer.Serialize<List<Material>>(materialDb);
             await dbCache.StringSetAsync(cacheName, serializedMaterial, TimeSpan.FromMinutes(10));
-            return Ok(materiaisBanco);
+            return Ok(materialDb);
         }
 
-        [HttpGet("ObterTodos")]
-        public async Task<IActionResult> ObterTodos ()
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAll ()
         {
-            var materiaisBanco = await _context.Materiais.AsNoTracking().Where(x => x.Nome.Contains("")).ToListAsync();
+            var materialsDb = await _context.Materials.AsNoTracking().Where(x => x.Name.Contains("")).ToListAsync();
 
-            return Ok(materiaisBanco);
+            return Ok(materialsDb);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete (int id)
         {
-            var materialBanco = await _context.Materiais.FirstOrDefaultAsync(x => x.Id == id);
+            var materialDb = await _context.Materials.FirstOrDefaultAsync(x => x.Id == id);
 
-            if (materialBanco == null)
+            if (materialDb == null)
             {
                 return NotFound("Esse material não existe no estoque! ");
             }
 
-            _context.Materiais.Remove(materialBanco);
+            _context.Materials.Remove(materialDb);
             await _context.SaveChangesAsync();
 
             var dbCache = _cache.GetDatabase();
@@ -125,21 +124,21 @@ namespace API_ClinicStock.Controller
         [HttpPut]
         public async Task<IActionResult> Update(int id, Material material)
         {
-            var materialBanco = await _context.Materiais.FirstOrDefaultAsync(x => x.Id == id);
+            var materialDb = await _context.Materials.FirstOrDefaultAsync(x => x.Id == id);
 
-            if (materialBanco == null)
+            if (materialDb == null)
             {
                 return NotFound("Esse material não existe no estoque! ");
             }
 
-            materialBanco.Nome = material.Nome;
-            materialBanco.Embalagem = material.Embalagem;
-            materialBanco.Quantidade = material.Quantidade;
+            materialDb.Name = material.Name;
+            materialDb.Packaging = material.Packaging;
+            materialDb.Amount = material.Amount;
 
-            _context.Materiais.Update(materialBanco);
+            _context.Materials.Update(materialDb);
             await _context.SaveChangesAsync();
 
-            var materialSerialized = JsonSerializer.Serialize<Material>(materialBanco);
+            var materialSerialized = JsonSerializer.Serialize<Material>(materialDb);
 
             var dbCache = _cache.GetDatabase();
             var cacheKey = $"material:{id}";
@@ -150,11 +149,11 @@ namespace API_ClinicStock.Controller
             {
                 await dbCache.KeyDeleteAsync(cacheKey);
                 await dbCache.StringSetAsync(cacheKey, materialSerialized, TimeSpan.FromMinutes(10));
-                return Ok(materialBanco);
+                return Ok(materialDb);
             }
 
             await dbCache.StringSetAsync(cacheKey, materialSerialized, TimeSpan.FromMinutes(10));
-            return Ok(materialBanco);
+            return Ok(materialDb);
         }
 
     }
