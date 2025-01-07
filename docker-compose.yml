@@ -1,0 +1,43 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP.NET Core service.
+
+version: '3.4'
+
+services:
+  apiclinicstock:
+    build: /src
+    ports:
+      - 5124:5124
+    depends_on: 
+      - mssql
+    networks:
+      - app-network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__ConexaoPadrao=Server=mssql;Database=Logins;User Id=sa;Password=Password123!;Encrypt=False
+
+
+  mssqldata:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    volumes:
+      - mssql-data:/var/opt/mssql
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - 1433:1433
+    networks:
+      - app-network
+    volumes:
+      - ./scripts:/usr/src/app
+    working_dir: /usr/src/app
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: Password123!
+    depends_on:
+      - mssqldata
+volumes:
+  mssql-data:
+
+networks:
+  app-network:
+    driver: bridge
