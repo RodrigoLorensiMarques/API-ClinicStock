@@ -14,7 +14,7 @@ services:
       - app-network
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__ConexaoPadrao=Server=mssql;Database=EstoqueClinica;User Id=sa;Password=Password123!;Encrypt=False
+      - ConnectionStrings__ConexaoPadrao=Server=mssql;Database=ClinicStock;User Id=sa;Password=Password123!;Encrypt=False
       - Redis__ConnectionString=redis:6379,password=my-password
 
   redis:
@@ -24,7 +24,7 @@ services:
       - "6379:6379"
     volumes:
       - /path/to/local/dаta:/root/redis
-      - /path/to/local/redis.conf:/usr/local/etc/redis/redis.conf
+      - /path/to/local/redis.conf:/usr/local/etc/redis/
     environment:
       - REDIS_PASSWORD=my-password
       - REDIS_PORT=6379
