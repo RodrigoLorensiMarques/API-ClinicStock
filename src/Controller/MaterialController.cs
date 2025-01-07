@@ -43,7 +43,7 @@ namespace API_ClinicStock.Controller
             }
             catch (Exception)
             {
-                return StatusCode(500, "01X35 - Ocorreu um erro interno ao processar sua solicitação");
+                 return StatusCode(500, "01X35 - Ocorreu um erro interno ao processar sua solicitação");  
             }
         }
 
@@ -124,7 +124,6 @@ namespace API_ClinicStock.Controller
             }
             catch (Exception)
             {
-
                 return StatusCode(500, "01X38 - Ocorreu um erro interno ao processar sua solicitação");
             }
         }
