@@ -3,6 +3,7 @@ using API_ClinicStock.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_ClinicStock.Migrations
 {
     [DbContext(typeof(StockContext))]
-    partial class EstoqueContextModelSnapshot : ModelSnapshot
+    [Migration("20250108174630_refactPropertiesV2")]
+    partial class refactPropertiesV2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,30 +28,24 @@ namespace API_ClinicStock.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("id");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("amount");
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("DECIMAL");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("VARCHAR")
-                        .HasColumnName("name");
+                        .HasColumnType("VARCHAR");
 
                     b.Property<string>("Packaging")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("VARCHAR")
-                        .HasColumnName("packaging");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("materials", (string)null);
+                    b.ToTable("Material", (string)null);
                 });
 
             modelBuilder.Entity("API_ClinicStock.Entities.Medicine", b =>
@@ -60,28 +57,22 @@ namespace API_ClinicStock.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Amount")
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("amount");
+                        .HasColumnType("INTEGER");
 
                     b.Property<decimal>("Milligram")
-                        .HasColumnType("DECIMAL")
-                        .HasColumnName("miligram");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("VARCHAR")
-                        .HasColumnName("name");
+                        .HasColumnType("VARCHAR");
 
                     b.Property<string>("Packaging")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("VARCHAR")
-                        .HasColumnName("packaging");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("medicines", (string)null);
+                    b.ToTable("Medicine", (string)null);
                 });
 #pragma warning restore 612, 618
         }
