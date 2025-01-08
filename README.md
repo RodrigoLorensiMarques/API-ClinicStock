@@ -29,6 +29,9 @@ Realiza armazenamento de dados frequentes em cache para aumentar a performance r
 - __GET /Medicine/name:__ Recupera um medicamento pelo nome.
 - __GET /Medicine/GetAll:__  Recupera todos os medicamentos.
 
+## Tabelas
+![Texto Alternativo](https://github.com/RodrigoLorensiMarques/API-ClinicStock/blob/main/DbDiagrama.png)
+
 
 ## Como Rodar
 ### Requisitos:
