@@ -1,7 +1,7 @@
 # API de Controle De Estoque
 
-API para controle de estoque de materiais e medicamentos de uma clinica de saúde.
-Utiliza armazenamento de dados frequentes em cache para aumentar a performance reduzindo o tempo de resposta.
+API para controle de estoque de materiais e medicamentos de uma clinica de saúde. \
+Realiza armazenamento de dados frequentes em cache para aumentar a performance reduzindo o tempo de resposta.
 
 ## Tecnologias
 - C# .NET
@@ -32,4 +32,18 @@ Utiliza armazenamento de dados frequentes em cache para aumentar a performance r
 
 ## Como Rodar
 ### Requisitos:
+- [.NET 9](https://dotnet.microsoft.com/pt-br/download)
+- [Docker](https://docs.docker.com/get-started/get-docker/)
+
+### Passo a Passo:
+1. Em seu terminal, acesse a pasta raiz do repositório
+
+2. Para subir os serviços use `docker-compose up` 
+
+3. Dentro do diretório __src__, restaure os pacotes usando `dotnet restore`
+
+4. Aplique as migrations usando `dotnet-ef database update`
+
+5. Pronto! Agora você pode acessar o http://localhost:5124/swagger para ter acesso a interface do Swagger.
+
 
