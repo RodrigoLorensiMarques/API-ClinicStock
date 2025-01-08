@@ -36,6 +36,7 @@ namespace Api_ClinicStock.Controller
                     return BadRequest("A quantidade não pode ser negativa!");
                 }
 
+                medicine.CreateDate = DateTime.UtcNow;
                 _context.Medicines.Add(medicine);
                 await _context.SaveChangesAsync();
 
@@ -175,6 +176,7 @@ namespace Api_ClinicStock.Controller
                 medicineDb.Name = medicine.Name;
                 medicineDb.Milligram = medicine.Milligram;
                 medicineDb.Packaging = medicine.Packaging;
+                medicineDb.LastUpdateDate = DateTime.UtcNow;
 
                 if (medicine.Amount <0)
                 {

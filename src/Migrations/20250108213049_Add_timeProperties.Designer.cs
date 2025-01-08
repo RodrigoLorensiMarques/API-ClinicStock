@@ -4,6 +4,7 @@ using API_ClinicStock.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_ClinicStock.Migrations
 {
     [DbContext(typeof(StockContext))]
-    partial class EstoqueContextModelSnapshot : ModelSnapshot
+    [Migration("20250108213049_Add_timeProperties")]
+    partial class Add_timeProperties
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,12 +39,10 @@ namespace API_ClinicStock.Migrations
                         .HasColumnName("amount");
 
                     b.Property<DateTime>("CreateDate")
-                        .HasColumnType("SMALLDATETIME")
-                        .HasColumnName("create_date");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastUpdateDate")
-                        .HasColumnType("SMALLDATETIME")
-                        .HasColumnName("last_update_date");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -73,12 +74,10 @@ namespace API_ClinicStock.Migrations
                         .HasColumnName("amount");
 
                     b.Property<DateTime>("CreateDate")
-                        .HasColumnType("SMALLDATETIME")
-                        .HasColumnName("create_date");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastUpdateDate")
-                        .HasColumnType("SMALLDATETIME")
-                        .HasColumnName("last_update_date");
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("Milligram")
                         .HasColumnType("DECIMAL")

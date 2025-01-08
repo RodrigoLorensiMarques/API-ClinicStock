@@ -12,5 +12,7 @@ namespace API_ClinicStock.Entities
         public decimal Milligram { get; set; }
         public string Packaging { get; set; }
         public int Amount { get; set; }
+        public DateTime CreateDate { get; set; }
+        public DateTime LastUpdateDate { get; set; }
     }
 }

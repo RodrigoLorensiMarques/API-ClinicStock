@@ -4,6 +4,7 @@ using API_ClinicStock.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_ClinicStock.Migrations
 {
     [DbContext(typeof(StockContext))]
-    partial class EstoqueContextModelSnapshot : ModelSnapshot
+    [Migration("20250108215444_refactDatePropertiesV2")]
+    partial class refactDatePropertiesV2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,11 +39,11 @@ namespace API_ClinicStock.Migrations
                         .HasColumnName("amount");
 
                     b.Property<DateTime>("CreateDate")
-                        .HasColumnType("SMALLDATETIME")
+                        .HasColumnType("datetime2")
                         .HasColumnName("create_date");
 
                     b.Property<DateTime>("LastUpdateDate")
-                        .HasColumnType("SMALLDATETIME")
+                        .HasColumnType("datetime2")
                         .HasColumnName("last_update_date");
 
                     b.Property<string>("Name")
@@ -73,11 +76,11 @@ namespace API_ClinicStock.Migrations
                         .HasColumnName("amount");
 
                     b.Property<DateTime>("CreateDate")
-                        .HasColumnType("SMALLDATETIME")
+                        .HasColumnType("datetime2")
                         .HasColumnName("create_date");
 
                     b.Property<DateTime>("LastUpdateDate")
-                        .HasColumnType("SMALLDATETIME")
+                        .HasColumnType("datetime2")
                         .HasColumnName("last_update_date");
 
                     b.Property<decimal>("Milligram")

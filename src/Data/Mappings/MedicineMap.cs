@@ -35,6 +35,16 @@ namespace API_ClinicStock.Data.Mappings
             .IsRequired()
             .HasColumnType("INTEGER")
             .HasColumnName("amount");
+
+            builder.Property(x => x.CreateDate)
+            .IsRequired()
+            .HasColumnName("create_date")
+            .HasColumnType("SMALLDATETIME");
+
+            builder.Property(x => x.LastUpdateDate)
+            .IsRequired()
+            .HasColumnName("last_update_date")
+            .HasColumnType("SMALLDATETIME");
         }
     }
 }
