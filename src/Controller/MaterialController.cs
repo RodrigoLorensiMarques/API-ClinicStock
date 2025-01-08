@@ -31,6 +31,11 @@ namespace API_ClinicStock.Controller
         {
             try
             {
+                if (material.Amount <0)
+                {
+                    return BadRequest("A quantidade não pode ser negativa!");
+                }
+
                 _context.Add(material);
                 await _context.SaveChangesAsync();
 
@@ -169,6 +174,12 @@ namespace API_ClinicStock.Controller
 
                 materialDb.Name = material.Name;
                 materialDb.Packaging = material.Packaging;
+
+                if (material.Amount <0)
+                {
+                    return BadRequest("A quantidade não pode ser negativa!");
+                }
+
                 materialDb.Amount = material.Amount;
 
                 _context.Materials.Update(materialDb);
