@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using API_ClinicStock.Context;
+using API_ClinicStock.DTOs.Medicine;
 using API_ClinicStock.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
@@ -27,16 +28,23 @@ namespace Api_ClinicStock.Controller
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create (Medicine medicine)
+        public async Task<IActionResult> Create (CreateMedicineDTO input)
         {
             try
             {
-                if (medicine.Amount <0)
+                if (input.Amount <0)
                 {
                     return BadRequest("A quantidade não pode ser negativa!");
                 }
 
+                Medicine medicine = new Medicine();
+                medicine.Name = input.Name;
+                medicine.Milligram = input.Milligram;
+                medicine.Packaging = input.Packaging;
+                medicine.Amount = input.Amount;
                 medicine.CreateDate = DateTime.UtcNow;
+                medicine.LastUpdateDate = DateTime.UtcNow;
+
                 _context.Medicines.Add(medicine);
                 await _context.SaveChangesAsync();
 
@@ -162,7 +170,7 @@ namespace Api_ClinicStock.Controller
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update (int Id, Medicine medicine)
+        public async Task<IActionResult> Update (int Id, UpdateMedicineDTO input)
         {
             try
             {
@@ -173,17 +181,16 @@ namespace Api_ClinicStock.Controller
                     return NotFound("Esse medicamento não existe no estoque! ");
                 }
 
-                medicineDb.Name = medicine.Name;
-                medicineDb.Milligram = medicine.Milligram;
-                medicineDb.Packaging = medicine.Packaging;
-                medicineDb.LastUpdateDate = DateTime.UtcNow;
-
-                if (medicine.Amount <0)
+                else if (input.Amount <0)
                 {
                     return BadRequest("A quantidade não pode ser negativa!");
                 }
-                
-                medicineDb.Amount = medicine.Amount;
+
+                medicineDb.Name = input.Name;
+                medicineDb.Milligram = input.Milligram;
+                medicineDb.Packaging = input.Packaging;
+                medicineDb.LastUpdateDate = DateTime.UtcNow;
+                medicineDb.Amount = input.Amount;
 
                 _context.Medicines.Update(medicineDb);
                 await _context.SaveChangesAsync();

@@ -10,6 +10,8 @@ using Microsoft.IdentityModel.Tokens;
 using StackExchange.Redis;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
+using API_ClinicStock.DTOs.Material;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API_ClinicStock.Controller
 {
@@ -27,15 +29,19 @@ namespace API_ClinicStock.Controller
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Material material)
+        public async Task<IActionResult> Create(CreateMaterialDTO input)
         {
             try
             {
-                if (material.Amount <0)
+                if (input.Amount <0)
                 {
                     return BadRequest("A quantidade não pode ser negativa!");
                 }
 
+                Material material = new Material();
+                material.Name = input.Name;
+                material.Packaging = input.Packaging;
+                material.Amount = input.Amount;
                 material.CreateDate = DateTime.UtcNow;
                 material.LastUpdateDate = DateTime.UtcNow;
 
@@ -164,7 +170,7 @@ namespace API_ClinicStock.Controller
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update(int id, Material material)
+        public async Task<IActionResult> Update(int id, UpdateMaterialDTO input)
         {
             try
             {
@@ -175,16 +181,15 @@ namespace API_ClinicStock.Controller
                     return NotFound("Esse material não existe no estoque! ");
                 }
 
-                materialDb.Name = material.Name;
-                materialDb.Packaging = material.Packaging;
-                materialDb.LastUpdateDate = DateTime.UtcNow;
-
-                if (material.Amount <0)
+                else if (input.Amount <0)
                 {
                     return BadRequest("A quantidade não pode ser negativa!");
                 }
 
-                materialDb.Amount = material.Amount;
+                materialDb.Name = input.Name;
+                materialDb.Packaging = input.Packaging;
+                materialDb.LastUpdateDate = DateTime.UtcNow;
+                materialDb.Amount = input.Amount;
 
                 _context.Materials.Update(materialDb);
                 await _context.SaveChangesAsync();
