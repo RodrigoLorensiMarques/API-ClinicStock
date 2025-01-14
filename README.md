@@ -43,7 +43,7 @@ Realiza armazenamento de dados frequentes em cache para aumentar a performance r
 
 2. Para subir os serviços use `docker-compose up` 
 
-3. Dentro do diretório __src__, restaure os pacotes usando `dotnet restore`
+3. Dentro do diretório __WebApi__, restaure os pacotes usando `dotnet restore`
 
 4. Aplique as migrations usando `dotnet-ef database update`
 
