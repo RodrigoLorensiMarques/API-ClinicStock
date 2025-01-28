@@ -22,6 +22,8 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
 
 builder.Services.AddControllers();
 
+builder.Services.AddCors();
+
 var app = builder.Build();
 
 
@@ -34,8 +36,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-
 app.UseRouting();
+
+app.UseCors( x =>
+    {
+        x.AllowAnyHeader();
+        x.AllowAnyMethod();
+        x.AllowAnyOrigin();
+    });
+
 app.UseAuthorization();
 
 app.MapControllers(); 
