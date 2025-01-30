@@ -1,0 +1,8 @@
+.header-material{
+    justify-content: space-between;
+    display: flex;
+    background-color: #FDFAFA;
+    padding: 15px;
+    border-radius: 10px 10px 0px 0px;
+    color: #2E2E2E;
+}

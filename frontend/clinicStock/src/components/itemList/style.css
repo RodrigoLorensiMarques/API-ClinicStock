@@ -1,0 +1,10 @@
+.item-list{
+        justify-content: space-between;
+        display: flex;
+        background-color: #FDFAFA;
+        padding: 15px;
+        border-radius: 5px;
+        color: #B7B7B7;
+        margin-top: 5px;
+        
+    }

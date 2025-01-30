@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
-import ItemList from "../../components/itemList";
 import SideBar from "../../components/sideBar";
 import SearchField from "../../components/searchField";
+import AddItemButton from "../../components/addItemButton";
+import HeaderMaterial from "../../components/headerMaterial";
+import ItemList from "../../components/itemList";
 import axios from 'axios'
 
 import './style.css'
@@ -33,9 +35,24 @@ function App() {
             )}
       </div> */}
 
-      <div className='container'>
-        <SideBar />
-        <SearchField/>
+      <div className='parent-container'>
+          <div>
+            <SideBar />
+          </div>
+            <div className='dashboard-control'>
+              <SearchField />
+
+              <div className='dashboard-content'>
+                <h1>Material</h1>
+                <AddItemButton item="Material" />
+              </div>
+              
+              <div className='dashboard-itemns'>
+                <HeaderMaterial />
+                <ItemList name={"Gaze"} id={"1545"} packaging={"Rolo"} amount={"10"}/>
+            
+              </div>
+          </div>
       </div>
 
 
