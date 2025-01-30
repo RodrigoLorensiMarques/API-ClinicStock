@@ -1,15 +1,29 @@
-.field{
-    border-radius: 5px;
+.search-field {
+    position: relative;
+    display: flex;
+    align-items: center;
     width: 35%;
-    border-style: none;
-    color: #2E2E2E;
-    background-color: #FDFAFA;
-    padding: 1%;
-    font-size: 100%;
-    outline: none;
     margin-left: 5%;
 }
 
-.field::placeholder{
+.field {
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    color: #2E2E2E;
+    background-color: #FDFAFA;
+    padding: 10px 10px 10px 35px;
+    font-size: 16px;
+    outline: none;
+}
+
+.field::placeholder {
     color: #B7B7B7;
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    color: #B7B7B7;
+    font-size: 15px;
 }

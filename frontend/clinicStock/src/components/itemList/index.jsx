@@ -10,6 +10,12 @@ function ItemList({name, id, packaging, amount}) {
             <label>{id}</label>
             <label>{packaging}</label>
             <label>{amount}</label>
+
+            <div className="container-buttons">
+                <button className="edit-icon"><i class="fa-solid fa-pen-to-square"></i></button>
+                <button className="trash-icon"><i class="fa-solid fa-trash"></i></button>
+            </div>
+
         </div>
     )
 }

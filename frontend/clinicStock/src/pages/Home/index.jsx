@@ -25,16 +25,6 @@ function App() {
 
   return (
     <>
-        
-      {/* <div>
-            {data && data.map((item) => (
-                <div>
-                  <ItemList name={item.name} packaging = {item.packaging} amount={item.amount} />
-              </div>
-                )
-            )}
-      </div> */}
-
       <div className='parent-container'>
           <div>
             <SideBar />
@@ -48,8 +38,14 @@ function App() {
               </div>
               
               <div className='dashboard-itemns'>
-                <HeaderMaterial />
-                <ItemList name={"Gaze"} id={"1545"} packaging={"Rolo"} amount={"10"}/>
+                  <HeaderMaterial />
+                  
+                {data && data.map((item) => (
+                <div>
+                  <ItemList name={item.name} id={item.id} packaging={item.packaging} amount={item.amount}/>
+                </div>
+                )
+                )}
             
               </div>
           </div>

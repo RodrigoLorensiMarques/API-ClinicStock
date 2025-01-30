@@ -10,6 +10,7 @@ function HeaderMaterial() {
             <label>ID do Produto</label>
             <label>Embalagem</label>
             <label>Quantidade</label>
+            <label></label>
         </div>
         
     )

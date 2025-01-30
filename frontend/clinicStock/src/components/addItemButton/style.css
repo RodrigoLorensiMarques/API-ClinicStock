@@ -3,7 +3,7 @@
     height: 50px;
     width: 130px;
     color: #FDFAFA;
-    background-color: #89C6FF;
+    background-color: #A7CEB4;
     border-style: none;
     font-size: 15px;
     font-weight: bold;
@@ -15,5 +15,5 @@
 }
 
 .add-item-button button:hover{
-    background-color: #94c8f8;
+    background-color: #b4dfc2;
 }

@@ -6,9 +6,8 @@ function SearchField() {
     return (
 
         <div class="search-field">
-
-            <input className="field" type="text" placeholder="Pesquisar" maxLength={70}/>
-
+            <span className="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <input className="field" type="text" placeholder="Pesquisar" maxLength={70} />
         </div>
         
     )
