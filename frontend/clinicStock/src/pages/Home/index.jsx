@@ -39,7 +39,7 @@ function App() {
                   <HeaderMaterial />
                   {data && data.map((item) => (
                   <div>
-                      <ItemList name="{item.name}" id="{item.id}" packaging="{item.packaging}" amount="{item.amount}" />
+                      <ItemList name={item.name} id={item.id} packaging={item.packaging} amount={item.amount} />
                   </div>
                   ) )}
               </div>
@@ -48,5 +48,4 @@ function App() {
     </>
   )
 }
-
 export default App

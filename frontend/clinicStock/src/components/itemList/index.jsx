@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import DeleteMaterial from "../../services/serveDeleteMaterials.js";
 import './style.css'
 
 function ItemList({name, id, packaging, amount}) {
@@ -13,7 +14,7 @@ function ItemList({name, id, packaging, amount}) {
 
             <div className="container-buttons">
                 <button className="edit-icon"><i class="fa-solid fa-pen-to-square"></i></button>
-                <button className="trash-icon"><i class="fa-solid fa-trash"></i></button>
+                <button onClick={() => DeleteMaterial(id)} className="trash-icon"><i class="fa-solid fa-trash"></i></button>
             </div>
 
         </div>
