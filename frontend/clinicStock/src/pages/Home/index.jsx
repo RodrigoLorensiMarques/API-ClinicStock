@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import ItemList from "../../components/itemList";
+import SideBar from "../../components/sideBar";
+import SearchField from "../../components/searchField";
 import axios from 'axios'
 
 import './style.css'
@@ -21,17 +23,22 @@ function App() {
 
   return (
     <>
-        <div>
+        
+      {/* <div>
             {data && data.map((item) => (
                 <div>
-                    <p>{item.name} {item.packaging} {item.amount}</p>
-                </div>
+                  <ItemList name={item.name} packaging = {item.packaging} amount={item.amount} />
+              </div>
                 )
             )}
-        </div>
-      
+      </div> */}
 
-      <ItemList />
+      <div className='container'>
+        <SideBar />
+        <SearchField/>
+      </div>
+
+
     </>
   )
 }

@@ -1,0 +1,15 @@
+.field{
+    border-radius: 5px;
+    width: 60vh;
+    height: 2vh;
+    border-style: none;
+    color: #2E2E2E;
+    background-color: #FDFAFA;
+    padding: 4%;
+    font-size: 100%;
+    outline: none;
+}
+
+.field::placeholder{
+    color: #B7B7B7;
+}
