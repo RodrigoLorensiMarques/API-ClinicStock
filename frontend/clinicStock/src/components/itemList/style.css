@@ -1,11 +1,12 @@
 .item-list{
-        justify-content: space-between;
-        display: flex;
-        background-color: #FDFAFA;
-        padding: 15px;
-        border-radius: 5px;
-        color: #8f8f8f;
-        margin-top: 5px;        
+    background-color: #FDFAFA;
+    padding: 15px;
+    border-radius: 5px;
+    color: #8f8f8f;
+    margin-top: 5px;  
+    display: grid;    
+    grid-template-columns: 1fr 1fr 1fr 1fr auto; 
+    gap: 10px;
 }
 
 .edit-icon{
@@ -32,4 +33,5 @@
     display: flex;
     width: 60px;
     justify-content: space-between;
+    gap: 10px;
 }

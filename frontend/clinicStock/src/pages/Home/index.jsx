@@ -25,33 +25,26 @@ function App() {
 
   return (
     <>
-      <div className='parent-container'>
+      <div className="parent-container">
           <div>
-            <SideBar />
+              <SideBar />
           </div>
-            <div className='dashboard-control'>
+          <div className="dashboard-control">
               <SearchField />
-
-              <div className='dashboard-content'>
-                <h1>Material</h1>
-                <AddItemButton item="Material" />
+              <div className="dashboard-content">
+                  <h1>Material</h1>
+                  <AddItemButton item="Material" />
               </div>
-              
-              <div className='dashboard-itemns'>
+              <div className="dashboard-itemns">
                   <HeaderMaterial />
-                  
-                {data && data.map((item) => (
-                <div>
-                  <ItemList name={item.name} id={item.id} packaging={item.packaging} amount={item.amount}/>
-                </div>
-                )
-                )}
-            
+                  {data && data.map((item) => (
+                  <div>
+                      <ItemList name="{item.name}" id="{item.id}" packaging="{item.packaging}" amount="{item.amount}" />
+                  </div>
+                  ) )}
               </div>
           </div>
       </div>
-
-
     </>
   )
 }
