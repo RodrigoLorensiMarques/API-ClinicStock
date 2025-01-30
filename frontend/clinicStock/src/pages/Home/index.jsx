@@ -4,24 +4,14 @@ import SearchField from "../../components/searchField";
 import AddItemButton from "../../components/addItemButton";
 import HeaderMaterial from "../../components/headerMaterial";
 import ItemList from "../../components/itemList";
+import GetMaterials from "../../services/servGetMaterials.js";
 import axios from 'axios'
 
 import './style.css'
 
 function App() {
 
-  const [data, setData] = useState(null)
-  
-      useEffect(() => {
-        axios.get("http://localhost:5124/Material/GetAll")
-            .then((Response) => {
-                setData(Response.data);
-            })
-            
-            .catch(() => {
-                console.log("Error")
-            })
-    }, [])
+  const data = GetMaterials();
 
   return (
     <>

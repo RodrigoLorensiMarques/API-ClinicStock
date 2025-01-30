@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import DeleteMaterial from "../../services/serveDeleteMaterials.js";
+import DeleteMaterial from "../../services/servDeleteMaterials.js";
 import './style.css'
 
 function ItemList({name, id, packaging, amount}) {

@@ -1,14 +1,20 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-function GetMaterials(id) {
+function GetMaterials() {
 
-    axios.delete("http://localhost:5124/Material/"+id)
-        .then(response => {
-            console.log(response.data)
-        })
-        .catch(error => {
-            console.log("Error",error)
-        });
+    const [data, setData] = useState(null)
+    useEffect(() => {
+      axios.get("http://localhost:5124/Material/GetAll")
+          .then((Response) => {
+              setData(Response.data);
+          })
+          
+          .catch(() => {
+              console.log("Error")
+          })
+    }, [])
+    
+    return data;
  }
 export default GetMaterials
