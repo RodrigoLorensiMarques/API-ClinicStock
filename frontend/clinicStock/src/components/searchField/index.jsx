@@ -10,7 +10,7 @@ function SearchField({setSearchTerm}) {
                 className="field"
                 type="text"
                 placeholder="Pesquisar"
-                maxLength={70}
+                maxLength={40}
                 onChange={(e) => setSearchTerm(e.target.value)}
             />
         </div>

@@ -10,6 +10,7 @@ import './style.css'
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [addMaterial, setAddMaterial] = useState(false);
 
 
   return (
@@ -22,10 +23,10 @@ function App() {
               <SearchField setSearchTerm={setSearchTerm} />
               <div className="dashboard-content">
                   <h1>Material</h1>
-                  <AddItemButton item="Material" />
+            <AddItemButton item="Material" setAddMaterial={setAddMaterial} addMaterial={addMaterial} />
               </div>
               <div className="dashboard-itemns">
-                  <AddMaterialForm />
+                  <AddMaterialForm addMaterial={addMaterial} setAddMaterial={setAddMaterial}/>
                   <HeaderMaterial />
                   <MaterialList searchTerm={searchTerm}/>
               </div>
