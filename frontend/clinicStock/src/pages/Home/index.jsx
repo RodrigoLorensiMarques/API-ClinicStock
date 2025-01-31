@@ -4,6 +4,7 @@ import SearchField from "../../components/searchField";
 import AddItemButton from "../../components/addItemButton";
 import HeaderMaterial from "../../components/headerMaterial";
 import MaterialList from "../../components/materialList";
+import AddMaterialForm from "../../components/addMaterialForm";
 
 import './style.css'
 
@@ -24,6 +25,7 @@ function App() {
                   <AddItemButton item="Material" />
               </div>
               <div className="dashboard-itemns">
+                  <AddMaterialForm />
                   <HeaderMaterial />
                   <MaterialList searchTerm={searchTerm}/>
               </div>
