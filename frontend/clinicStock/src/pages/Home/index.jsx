@@ -8,6 +8,7 @@ import MaterialList from "../../components/materialList";
 import './style.css'
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState("");
 
 
   return (
@@ -17,14 +18,14 @@ function App() {
               <SideBar />
           </div>
           <div className="dashboard-control">
-              <SearchField />
+              <SearchField setSearchTerm={setSearchTerm} />
               <div className="dashboard-content">
                   <h1>Material</h1>
                   <AddItemButton item="Material" />
               </div>
               <div className="dashboard-itemns">
                   <HeaderMaterial />
-                  <MaterialList />
+                  <MaterialList searchTerm={searchTerm}/>
               </div>
           </div>
       </div>

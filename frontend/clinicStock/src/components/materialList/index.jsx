@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
-import {getMaterials, deleteMaterial} from "../../services/api.js";
+import { getMaterials, deleteMaterial } from "../../services/api.js";
 import './style.css'
 
-function MaterialList() {
+function MaterialList({ searchTerm }) {
   
     const [materials, setMaterials] = useState([]);
     const [erro, setErro] = useState(null);
@@ -15,7 +15,6 @@ function MaterialList() {
             setErro(error.message);
         }
     };
-
 
     const hendleDelete = async (id) => {
         try {
@@ -32,10 +31,14 @@ function MaterialList() {
         loadMaterials();
     }, []);
 
+    const filteredMaterials = materials.filter(material =>
+        material.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
 
     return (
         <div>
-            {materials.map((material) => (
+            {filteredMaterials.map((material) => (
             
             <div className="item-list">
                 <label>{material.name}</label>
@@ -51,8 +54,6 @@ function MaterialList() {
             </div>
             ))}  
         </div>
-
-
     )
 }
   export default MaterialList;
