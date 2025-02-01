@@ -21,3 +21,10 @@ export const deleteMaterial = async (id) => {
     }
 }
 
+export const addNewMaterial = async (dados) => {
+    try {
+        await axios.post(API_URL, dados);
+   } catch (error) {
+        console.log("Error", error);
+    }
+}

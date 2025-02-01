@@ -6,11 +6,13 @@ import HeaderMaterial from "../../components/headerMaterial";
 import MaterialList from "../../components/materialList";
 import AddMaterialForm from "../../components/addMaterialForm";
 
+
 import './style.css'
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [addMaterial, setAddMaterial] = useState(false);
+  const [addNewMaterial, setNewAddMaterial] = useState(false);
 
 
   return (

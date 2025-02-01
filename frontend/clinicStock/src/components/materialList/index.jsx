@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { getMaterials, deleteMaterial } from "../../services/api.js";
+import AddMaterialForm from "../addMaterialForm";
 import './style.css'
 
 function MaterialList({ searchTerm }) {
