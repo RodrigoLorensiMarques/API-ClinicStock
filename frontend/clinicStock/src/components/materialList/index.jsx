@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { getMaterials, deleteMaterial } from "../../services/api.js";
+import trashIcon from "../../assets/trash.svg" 
 import AddMaterialForm from "../addMaterialForm";
 import './style.css'
 
@@ -32,7 +33,7 @@ function MaterialList({ searchTerm, materials, loadMaterials}) {
 
                 <div className="container-buttons">
                     <button className="edit-icon"><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button onClick={() => hendleDelete(material.id)} className="trash-icon"><i class="fa-solid fa-trash"></i></button>
+                    <button onClick={() => hendleDelete(material.id)} className="trash-icon"><img src={trashIcon} alt="trashIcon" /></button>
                 </div>
 
             </div>

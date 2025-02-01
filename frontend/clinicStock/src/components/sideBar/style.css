@@ -34,3 +34,12 @@
 .links-items a:hover{
     text-decoration:underline;
 }
+
+.healingIcon{
+    height: 18px;
+    margin-right: 5px;
+}
+
+.medicine-icon{
+    height: 18px;
+}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import healingIcon from "../../assets/healing.svg" 
 import './style.css'
 
 function SideBar() {
@@ -9,8 +10,8 @@ function SideBar() {
             <div class="content">
                 <h1>StockClinic</h1>
                 <div className="links-items">
-                    <a href="#">Materiais</a>
-                    <a href="#">Medicamentos</a>
+                    <a><img className="healingIcon" src={healingIcon} />Materiais</a> 
+                    <a> <span className="medicine-icon" ><i class="fa-solid fa-capsules"></i></span> Medicamentos</a>
                 </div>
             </div>
         </div>
