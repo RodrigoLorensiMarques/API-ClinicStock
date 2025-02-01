@@ -7,13 +7,12 @@ function AddMaterialForm({ addMaterial, setAddMaterial, onAdd }) {
     
     const handleChange = (e) => {
         setDados({ ...dados, [e.target.name]: e.target.value });
-    }
+    };
 
     const handleSubmit = async () => {
-        await addNewMaterial(dados);
-        onAdd();
-    }
-  
+        await onAdd(dados);
+    };
+
     if (addMaterial)
     {
         return (
@@ -48,7 +47,7 @@ function AddMaterialForm({ addMaterial, setAddMaterial, onAdd }) {
     
                 <div className="form-container-buttons">
                     <button
-                        onClick={() => handleSubmit()}
+                        onClick={handleSubmit}
                         className="add-button">+ Adicionar
                     </button>
 
