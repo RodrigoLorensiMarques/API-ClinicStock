@@ -6,7 +6,7 @@ function HeaderMaterial() {
     return (
 
         <div class="header-material">
-            <label>Nome</label>
+            <label className="label-name">Nome</label>
             <label>ID Produto</label>
             <label>Unidade</label>
             <label>Quantidade</label>

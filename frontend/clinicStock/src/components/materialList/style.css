@@ -11,6 +11,36 @@
     font-size: 15px;
 }
 
+.container-buttons{
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;  
+}
+
+.item-list label{
+    padding: 5px;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+.item-list input{
+    border-width: 1px;
+    border-radius: 3px;
+    border-style: solid;
+    border-color: #dbd9d9;;
+    font-size: 15px;
+    outline: none;
+    color: #8f8f8f;
+    background-color: #FDFAFA;
+    padding: 5px;
+}
+
+
+.item-list input::placeholder{
+    color: #8f8f8f;
+}
+
 .edit-icon{
     color: #2E2E2E;
     cursor: pointer;
@@ -30,33 +60,6 @@
     background-color: #FDFAFA;
 }
 
-.container-buttons{
-    display: flex; 
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-}
-
-
-.item-list input{
-    border-width: 1px;
-    border-radius: 3px;
-    border-style: solid;
-    border-color: #dbd9d9;;
-    font-size: 15px;
-    outline: none;
-    color: #8f8f8f;
-    background-color: #FDFAFA;
-    padding: 5px;
-}
-
-
-.item-list input::placeholder{
-    color: #8f8f8f;
-}
-
-
-
 .check-icon{
     color: #2E2E2E;
     cursor: pointer;
@@ -75,9 +78,5 @@
     width: 60%;
 }
 
-.item-list label{
-    padding: 5px;
-    overflow: hidden;
-    word-wrap: break-word;
-}
+
 
