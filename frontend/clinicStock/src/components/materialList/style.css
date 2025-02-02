@@ -5,7 +5,8 @@
     color: #8f8f8f;
     margin-top: 5px;  
     display: grid;    
-    grid-template-columns: 1.5fr 1fr 1fr 1fr auto; 
+    grid-template-columns: 1.5fr 1fr 1fr 1fr min-content; 
+    align-items: center;
     gap: 10px;
     font-size: 15px;
 }
@@ -30,9 +31,9 @@
 }
 
 .container-buttons{
-    display: flex;
-    width: 60px;
+    display: flex; 
     justify-content: space-between;
+    align-items: center;
     gap: 10px;
 }
 
@@ -76,4 +77,7 @@
 
 .item-list label{
     padding: 5px;
+    overflow: hidden;
+    word-wrap: break-word;
 }
+
