@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import './style.css'
 
-function AddItemButton({ item, setAddButtonm, addButton }) {
+function AddItemButton({ item, setAddButton, addButton }) {
     
     if (!addButton) {
         return (
