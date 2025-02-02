@@ -1,12 +1,13 @@
 .item-list{
     background-color: #FDFAFA;
-    padding: 15px;
+    padding: 10px;
     border-radius: 5px;
     color: #8f8f8f;
     margin-top: 5px;  
     display: grid;    
     grid-template-columns: 1.5fr 1fr 1fr 1fr auto; 
     gap: 10px;
+    font-size: 15px;
 }
 
 .edit-icon{
@@ -16,7 +17,7 @@
     padding: 0px;
     border: none;
     font-size: 15px;
-    background-color: #F6F5F5;
+    background-color: #FDFAFA;
 }
 
 .trash-icon{
@@ -25,7 +26,7 @@
     padding: 0px;
     border: none;
     height: 15px;
-    background-color: #F6F5F5;
+    background-color: #FDFAFA;
 }
 
 .container-buttons{
@@ -33,4 +34,46 @@
     width: 60px;
     justify-content: space-between;
     gap: 10px;
+}
+
+
+.item-list input{
+    border-width: 1px;
+    border-radius: 3px;
+    border-style: solid;
+    border-color: #dbd9d9;;
+    font-size: 15px;
+    outline: none;
+    color: #8f8f8f;
+    background-color: #FDFAFA;
+    padding: 5px;
+}
+
+
+.item-list input::placeholder{
+    color: #8f8f8f;
+}
+
+
+
+.check-icon{
+    color: #2E2E2E;
+    cursor: pointer;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    font-size: 15px;
+    background-color: #FDFAFA;
+}
+
+.input-amout{
+    width: 30%;
+}
+
+.input-packaging{
+    width: 60%;
+}
+
+.item-list label{
+    padding: 5px;
 }
