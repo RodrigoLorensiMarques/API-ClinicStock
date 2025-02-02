@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react"
 import './style.css'
 
-function AddItemButton({ item, setAddMaterial, addMaterial }) {
+function AddItemButton({ item, setAddButtonm, addButton }) {
     
-    if (!addMaterial) {
+    if (!addButton) {
         return (
             <div className="add-item-button">
                 <button
-                    onClick={() => setAddMaterial(true)}>
+                    onClick={() => setAddButton(true)}>
                     <strong>+</strong> Add {item}
                 </button>
             </div>

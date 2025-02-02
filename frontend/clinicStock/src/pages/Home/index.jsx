@@ -11,7 +11,7 @@ import './style.css'
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [addMaterial, setAddMaterial] = useState(false);
+  const [addButton, setAddButton] = useState(false);
   const [materials, setMaterials] = useState([]);
 
   const loadMaterials = async () => {
@@ -49,10 +49,10 @@ function App() {
               <SearchField setSearchTerm={setSearchTerm} />
               <div className="dashboard-content">
                   <h1>Material</h1>
-            <AddItemButton item="Material" setAddMaterial={setAddMaterial} addMaterial={addMaterial} />
+            <AddItemButton item="Material" setAddButton={setAddButton} addButton={addButton}/>
               </div>
               <div className="dashboard-itemns">
-                  <AddMaterialForm addMaterial={addMaterial} setAddMaterial={setAddMaterial} onAdd={handleAddMaterial}/>
+                  <AddMaterialForm addButton={addButton} setAddButton={setAddButton} onAdd={handleAddMaterial}/>
                   <HeaderMaterial />
                   <MaterialList searchTerm={searchTerm} materials={materials} loadMaterials={loadMaterials} onEdit={handleEditMaterial}/>
               </div>

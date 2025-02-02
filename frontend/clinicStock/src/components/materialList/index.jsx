@@ -96,7 +96,7 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit }) {
                                 <button
                                     onClick={() => hendleDelete(material.id)}
                                     className="trash-icon">
-                                    <img src={trashIcon} alt="trashIcon" />
+                                    <img src={trashIcon} alt="trashIcon" draggable='false'/>
                                 </button>
                             </div>
                         </div>
@@ -116,7 +116,7 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit }) {
                                     <button
                                         onClick={() => hendleDelete(material.id)}
                                         className="trash-icon">
-                                        <img src={trashIcon} alt="trashIcon" />
+                                        <img src={trashIcon} alt="trashIcon" draggable='false'/>
                                     </button>
                             </div>
                          </div>

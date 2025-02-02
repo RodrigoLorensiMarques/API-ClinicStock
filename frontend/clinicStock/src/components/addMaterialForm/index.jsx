@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { addNewMaterial } from "../../services/api.js";
 import './style.css'
 
-function AddMaterialForm({ addMaterial, setAddMaterial, onAdd }) {
+function AddMaterialForm({ addButton, setAddButton, onAdd }) {
     const [dados, setDados] = useState({ name: "", packaging: "", amount: "" })   
     
     const handleChange = (e) => {
@@ -13,7 +13,7 @@ function AddMaterialForm({ addMaterial, setAddMaterial, onAdd }) {
         await onAdd(dados);
     };
 
-    if (addMaterial)
+    if (addButton)
     {
         return (
             <div class="add-material-form">
@@ -52,7 +52,7 @@ function AddMaterialForm({ addMaterial, setAddMaterial, onAdd }) {
                     </button>
 
                     <button
-                        onClick={() => { setAddMaterial(false) }}
+                        onClick={() => { setAddButton(false) }}
                         className="cancel-button">X Cancelar
                     </button>
 
