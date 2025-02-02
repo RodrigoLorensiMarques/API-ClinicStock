@@ -5,7 +5,7 @@ import AddItemButton from "../../components/addItemButton";
 import HeaderMaterial from "../../components/headerMaterial";
 import MaterialList from "../../components/materialList";
 import AddMaterialForm from "../../components/addMaterialForm";
-import { getMaterials, addNewMaterial } from "../../services/api.js";
+import { getMaterials, addNewMaterial, editMaterial } from "../../services/api.js";
 
 import './style.css'
 
@@ -26,6 +26,11 @@ function App() {
   const handleAddMaterial  = async (dados) => {
     await addNewMaterial(dados);
     setMaterials((prevMaterials) => [...prevMaterials, dados]);
+    loadMaterials();
+  }
+
+  const handleEditMaterial = async (id, dados) => {
+    await editMaterial(id, dados);
     loadMaterials();
   }
   
@@ -49,7 +54,7 @@ function App() {
               <div className="dashboard-itemns">
                   <AddMaterialForm addMaterial={addMaterial} setAddMaterial={setAddMaterial} onAdd={handleAddMaterial}/>
                   <HeaderMaterial />
-                  <MaterialList searchTerm={searchTerm} materials={materials} loadMaterials={loadMaterials}/>
+                  <MaterialList searchTerm={searchTerm} materials={materials} loadMaterials={loadMaterials} onEdit={handleEditMaterial}/>
               </div>
           </div>
       </div>

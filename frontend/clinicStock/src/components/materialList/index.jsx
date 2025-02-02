@@ -1,11 +1,46 @@
 import React, { useState, useEffect } from "react"
-import { getMaterials, deleteMaterial } from "../../services/api.js";
+import {deleteMaterial} from "../../services/api.js";
 import trashIcon from "../../assets/trash.svg" 
-import AddMaterialForm from "../addMaterialForm";
+
 import './style.css'
 
-function MaterialList({ searchTerm, materials, loadMaterials }) {
+function MaterialList({ searchTerm, materials, loadMaterials, onEdit }) {
     const [editingId, setEditingId] = useState(false);
+    const [dados, setDados] = useState({ name: "", packaging: "", amount: "" })  
+
+    useEffect(() => {
+        if (editingId) {
+            const materialToEdit = materials.find(material => material.id === editingId);
+
+            if (materialToEdit) {
+                setDados({
+                    name: materialToEdit.name,
+                    packaging: materialToEdit.packaging,
+                    amount: materialToEdit.amount
+                });
+            }
+        }
+    }, [editingId, materials]);
+    
+
+    const handleChange = (e) => {
+        setDados(prevDados => ({...prevDados, [e.target.name]: e.target.value }));
+    };
+
+    const handleSubmit = async (id) => {
+        try {
+            await onEdit(id, dados);
+        }
+
+        catch (error){
+            console.log(error);
+        }
+    };
+
+    const handleClickCheck = (id) => {
+        handleSubmit(id);
+        setEditingId(false);
+    }
     
 
     const hendleDelete = async (id) => {
@@ -30,25 +65,31 @@ function MaterialList({ searchTerm, materials, loadMaterials }) {
                     {editingId === material.id ? (
                         <div className="item-list">
                             <input
+                                name="name"
                                 type="text"
                                 placeholder={material.name}
                                 maxLength={40}
+                                onChange={handleChange}
                             />
                             <label>{material.id}</label>
                             <input
+                                name="packaging"
                                 type="text"
                                 placeholder={material.packaging}
                                 className="input-packaging"
+                                onChange={handleChange}
                             />
                             <input
+                                name="amount"
                                 type="number"
                                 placeholder={material.amount}
                                 className="input-amout"
+                                onChange={handleChange}
                             />
     
                             <div className="container-buttons">
                                 <button
-                                    onClick={() => setEditingId(false)}
+                                    onClick={() => handleClickCheck(material.id)}
                                     className="check-icon">
                                     <i class="fa-solid fa-check"></i>
                                 </button>

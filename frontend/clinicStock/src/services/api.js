@@ -28,3 +28,13 @@ export const addNewMaterial = async (dados) => {
         console.log("Error", error);
     }
 }
+
+export const editMaterial = async (id, dados) => {
+    try {
+        await axios.put(`${API_URL}?id=${id}`, dados);
+        
+   } catch (error) {
+        console.log("Error", error);
+        console.log(dados);
+    }
+}
