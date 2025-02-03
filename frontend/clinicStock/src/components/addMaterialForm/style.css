@@ -17,9 +17,9 @@
     width: 50px;
 }
 
-.input-unit{
-    width: 100px;
-    text-align: center;
+.select-type{
+    width: 110px;
+    text-align: left;
 }
 
 
@@ -29,7 +29,7 @@
     overflow: hidden;
 }
 
-.add-material-form input{
+.add-material-form input, select{
     border-radius: 5px;
     border: none;
     color: #2E2E2E;
@@ -71,3 +71,4 @@
 input::placeholder {
     color: #B7B7B7;
 }
+

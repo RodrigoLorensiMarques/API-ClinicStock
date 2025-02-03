@@ -26,15 +26,19 @@ function AddMaterialForm({ addButton, setAddButton, onAdd }) {
                         value={dados.name}
                         onChange={handleChange}
                     />
-                    <input
-                        className="input-unit"
-                        type="text"
-                        placeholder="Tipo"
-                        maxLength={20}
+                    <select
+                        className="select-type"
                         name="packaging"
                         value={dados.packaging}
-                        onChange={handleChange}
-                    />
+                        onChange={handleChange}>
+                        
+                        <option value="Unidade">Unidade</option>
+                        <option value="Rolo">Rolo</option>
+                        <option value="Pacote">Pacote</option>
+                        <option value="Caixa">Caixa</option>
+                    </select>
+
+
                     <input
                         className="input-amount"
                         type="number"

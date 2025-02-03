@@ -68,22 +68,28 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit }) {
                             <input
                                 name="name"
                                 type="text"
-                                placeholder={material.name}
+                                value={material.name}
                                 maxLength={40}
                                 onChange={handleChange}
                             />
                             <label>#{material.id}</label>
-                            <input
+
+                            <select
+                                className="select-type-edit"
                                 name="packaging"
-                                type="text"
-                                placeholder={material.packaging}
-                                className="input-packaging"
-                                onChange={handleChange}
-                            />
+                                value={dados.packaging}
+                                onChange={handleChange}>
+                                
+                                <option value="Unidade">Unidade</option>
+                                <option value="Rolo">Rolo</option>
+                                <option value="Pacote">Pacote</option>
+                                <option value="Caixa">Caixa</option>
+                            </select>
+
                             <input
                                 name="amount"
                                 type="number"
-                                placeholder={material.amount}
+                                value={material.amount}
                                 className="input-amout"
                                 onChange={handleChange}
                             />
