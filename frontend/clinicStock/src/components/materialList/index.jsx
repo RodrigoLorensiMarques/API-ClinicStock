@@ -54,7 +54,8 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit }) {
     };
 
     const filteredMaterials = materials.filter(material =>
-        material.name.toLowerCase().includes(searchTerm.toLowerCase())
+        material.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (`#`+material.id.toString()).includes(searchTerm)
     );
 
 
@@ -71,7 +72,7 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit }) {
                                 maxLength={40}
                                 onChange={handleChange}
                             />
-                            <label>{material.id}</label>
+                            <label>#{material.id}</label>
                             <input
                                 name="packaging"
                                 type="text"
@@ -103,7 +104,7 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit }) {
                     ) : (
                         <div className="item-list">
                             <label><strong>{material.name}</strong></label>
-                            <label>{material.id}</label>
+                            <label>#{material.id}</label>
                             <label>{material.packaging}</label>
                             <label>{material.amount}</label>
         

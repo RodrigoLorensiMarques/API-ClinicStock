@@ -8,7 +8,7 @@ function SideBar() {
 
         <div class="side-bar">
             <div class="content">
-                <h1>StockClinic</h1>
+                <h1>ClinicStock</h1>
                 <div className="links-items">
                     <a><img className="healingIcon" src={healingIcon} draggable="false" />Materiais</a> 
                     <a><span className="medicine-icon" ><i class="fa-solid fa-capsules"></i></span> Medicamentos</a>

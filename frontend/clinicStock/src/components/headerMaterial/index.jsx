@@ -8,7 +8,7 @@ function HeaderMaterial() {
         <div class="header-material">
             <label className="label-name">Nome</label>
             <label>ID Produto</label>
-            <label>Unidade</label>
+            <label>Tipo</label>
             <label>Quantidade</label>
         </div>
         

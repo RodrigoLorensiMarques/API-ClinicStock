@@ -29,7 +29,7 @@ function AddMaterialForm({ addButton, setAddButton, onAdd }) {
                     <input
                         className="input-unit"
                         type="text"
-                        placeholder="Unidade"
+                        placeholder="Tipo"
                         maxLength={20}
                         name="packaging"
                         value={dados.packaging}
