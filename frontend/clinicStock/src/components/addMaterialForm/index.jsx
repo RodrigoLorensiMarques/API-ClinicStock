@@ -21,7 +21,7 @@ function AddMaterialForm({ addButton, setAddButton, onAdd }) {
                 toastSuccessful("Item adicionado com sucesso!")
             }
             else {
-                toastError("Não foi possível adicionar o item.")
+                toastError("Não foi possível adicionar o item!")
             }
     
         } catch (error) {

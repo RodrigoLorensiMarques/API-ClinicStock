@@ -1,0 +1,15 @@
+.toast-sucess{
+    color: #A7CEB4;
+}
+
+.toast-error{
+    color: #e48f8f;
+}
+
+.toast-sucess .Toastify__progress-bar {
+    background-color: #A7CEB4;
+}
+
+.toast-error .Toastify__progress-bar {
+    background-color: #DF7474;
+}
