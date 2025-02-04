@@ -24,9 +24,22 @@ function App() {
   };
 
   const handleAddMaterial  = async (dados) => {
-    await addNewMaterial(dados);
-    setMaterials((prevMaterials) => [...prevMaterials, dados]);
-    loadMaterials();
+
+    try {
+        const response = await addNewMaterial(dados);
+      
+        if (response && response.success) {
+            setMaterials((prevMaterials) => [...prevMaterials, dados]);
+            loadMaterials();
+          return { success: true };
+        } 
+        else {
+          return { success: false, message: "Erro no servidor" };
+        }
+
+    } catch (error) {
+      return { success: false, message: "Erro no servidor" };
+    }
   }
 
   const handleEditMaterial = async (id, dados) => {

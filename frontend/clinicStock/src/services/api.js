@@ -23,9 +23,16 @@ export const deleteMaterial = async (id) => {
 
 export const addNewMaterial = async (dados) => {
     try {
-        await axios.post(API_URL, dados);
+        const result = await axios.post(API_URL, dados);
+
+        if (result.status === 200) {
+            return { success: true, data: result };
+        }
+
+
    } catch (error) {
         console.log("Error", error);
+        return { success: false, message: "Erro de comunicação com servidor" };
     }
 }
 
