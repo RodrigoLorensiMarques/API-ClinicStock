@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { addNewMaterial } from "../../services/api.js";
-import { ToastContainer, toast } from "react-toastify";
+import {toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 import './style.css'
 
 function AddMaterialForm({ addButton, setAddButton, onAdd }) {
@@ -9,26 +10,26 @@ function AddMaterialForm({ addButton, setAddButton, onAdd }) {
 
     const toastSuccessful = () => {
         toast.success("Item adicionado com sucesso!", {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "light",
+            position: "bottom-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "light",
         });
     };
     
 
     const toastError = () => {
         toast.error("Não foi possível adicionar o item.", {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "light",
+            position: "bottom-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "light",
         });
       };
     
@@ -102,8 +103,7 @@ function AddMaterialForm({ addButton, setAddButton, onAdd }) {
                         onClick={() => { setAddButton(false) }}
                         className="cancel-button">X Cancelar
                     </button>
-                    <ToastContainer />
-
+                    
                 </div>
     
             </div>  
