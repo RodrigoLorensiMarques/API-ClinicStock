@@ -1,37 +1,11 @@
 import React, { useState, useEffect } from "react"
-import { addNewMaterial } from "../../services/api.js";
-import {toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {toastSuccessful, toastError} from "../../utils/toastUtils.js"
 
 import './style.css'
 
 function AddMaterialForm({ addButton, setAddButton, onAdd }) {
     const [dados, setDados] = useState({ name: "", packaging: "", amount: "" })   
-
-    const toastSuccessful = () => {
-        toast.success("Item adicionado com sucesso!", {
-            position: "bottom-right",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "light",
-        });
-    };
-    
-
-    const toastError = () => {
-        toast.error("Não foi possível adicionar o item.", {
-            position: "bottom-right",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "light",
-        });
-      };
     
     const handleChange = (e) => {
         setDados({ ...dados, [e.target.name]: e.target.value });
@@ -44,10 +18,10 @@ function AddMaterialForm({ addButton, setAddButton, onAdd }) {
     
 
             if (response.success === true) {
-                toastSuccessful()
+                toastSuccessful("Item adicionado com sucesso!")
             }
             else {
-                toastError()
+                toastError("Não foi possível adicionar o item.")
             }
     
         } catch (error) {
@@ -55,7 +29,6 @@ function AddMaterialForm({ addButton, setAddButton, onAdd }) {
         }
     };
     
-
 
     if (addButton)
     {

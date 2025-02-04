@@ -1,26 +1,15 @@
 import React, { useState, useEffect } from "react"
 import {deleteMaterial} from "../../services/api.js";
 import trashIcon from "../../assets/trash.svg" 
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {toastSuccessful} from "../../utils/toastUtils.js"
 import './style.css'
 
 
 function MaterialList({ searchTerm, materials, loadMaterials, onEdit }) {
     const [editingId, setEditingId] = useState(false);
     const [dados, setDados] = useState({ name: "", packaging: "", amount: "" })  
-
-    const toastSuccessful = () => {
-        toast.success("Item removido com sucesso!", {
-            position: "bottom-right",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "light",
-        });
-    };
 
     useEffect(() => {
         if (editingId) {
@@ -60,7 +49,7 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit }) {
     const hendleDelete = async (id) => {
         try {
             await deleteMaterial(id);
-            toastSuccessful();
+            toastSuccessful("Item removido com sucesso!")
             loadMaterials();
             
         }
