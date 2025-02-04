@@ -4,8 +4,13 @@
     justify-content: center;
     color: #2E2E2E;
     overflow: hidden;
-    width: 16vw;
+    min-width: 200px;
+    min-height: 300px;
+    position: sticky;
+    top: 0;
+    width: 15vw;
     height: 100vh;
+    
 }
 
 .links-items{
@@ -26,9 +31,8 @@
 
 .side-bar h1{
     margin-bottom: 50px;
-    font-size: 35px;
+    font-size: 200%;
     margin-top: 80px;
-    
 }
 
 .links-items a:hover{

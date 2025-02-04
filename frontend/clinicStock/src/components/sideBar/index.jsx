@@ -7,7 +7,7 @@ function SideBar() {
     return (
 
         <div class="side-bar">
-            <div class="content">
+            <div class="content-sideBar">
                 <h1>ClinicStock</h1>
                 <div className="links-items">
                     <a><img className="healingIcon" src={healingIcon} draggable="false" />Materiais</a> 

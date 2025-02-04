@@ -42,8 +42,8 @@ function App() {
   return (
     <>
       <div className="parent-container">
-          <div>
-              <SideBar />
+          <div className='container-SideBar'>
+            <SideBar />
           </div>
           <div className="dashboard-control">
               <SearchField setSearchTerm={setSearchTerm} />
