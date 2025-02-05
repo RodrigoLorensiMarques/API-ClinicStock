@@ -36,8 +36,8 @@
     margin-top: 80px;
 }
 
-.links-items a:hover{
-    text-decoration:underline;
+.links-items span:hover{
+    color: #8f8f8f;
 }
 
 .healingIcon{
@@ -47,4 +47,9 @@
 
 .medicine-icon{
     height: 18px;
+    margin-right: 5px;
+}
+
+.current-routh{
+    color:#7dbb92;
 }
