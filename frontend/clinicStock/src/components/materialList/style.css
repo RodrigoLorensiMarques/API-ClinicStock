@@ -92,6 +92,11 @@
     color: #5f5e5e;
 }
 
+
+.container-buttons .trash-icon:hover{
+    color: #d13007;
+}
+
 @keyframes moveUp {
     to {
         opacity: 1;

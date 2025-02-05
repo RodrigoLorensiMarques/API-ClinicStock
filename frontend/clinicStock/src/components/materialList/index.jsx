@@ -3,13 +3,15 @@ import {deleteMaterial} from "../../services/api.js";
 import trashIcon from "../../assets/trash.svg" 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {toastSuccessful} from "../../utils/toastUtils.js"
+import { toastSuccessful } from "../../utils/toastUtils.js"
+import ConfirmModal from "../confirmModal"
 import './style.css'
 
 
 function MaterialList({ searchTerm, materials, loadMaterials, onEdit }) {
     const [editingId, setEditingId] = useState(false);
-    const [dados, setDados] = useState({ name: "", packaging: "", amount: "" })  
+    const [dados, setDados] = useState({ name: "", packaging: "", amount: "" }) 
+    const [openModalDelete, setOpenModalDelete] = useState(null);
 
     useEffect(() => {
         if (editingId) {
@@ -46,17 +48,7 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit }) {
     }
     
 
-    const hendleDelete = async (id) => {
-        try {
-            await deleteMaterial(id);
-            toastSuccessful("Item removido com sucesso!")
-            loadMaterials();
-            
-        }
-        catch (error) {
-            setErro(error.message);
-        }
-    };
+
 
     const filteredMaterials = materials.filter(material =>
         material.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -128,15 +120,17 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit }) {
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </button>
                                     <button
-                                        onClick={() => hendleDelete(material.id)}
+                                        onClick={() => setOpenModalDelete(material.id)}
                                         className="trash-icon">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
-                            </div>
-                         </div>
-                    )}
+                                </div>
+                                
+                            </div>   
+                        )}
                 </div>
             ))}  
+            <ConfirmModal loadMaterials={loadMaterials} isOpen={openModalDelete} setOpenModalDelete={setOpenModalDelete}/>
             <ToastContainer />
         </div>
     )

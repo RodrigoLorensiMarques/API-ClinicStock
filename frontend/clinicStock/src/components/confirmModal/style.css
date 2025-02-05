@@ -1,0 +1,87 @@
+.backgroud-modal{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(212, 212, 212, 0.4);
+    z-index: 1000;
+}
+
+
+.container-modal{
+    text-align: center;
+    position: fixed;
+    top: 30%;
+    right: 30%;
+    background-color: #F6F5F5;
+    width: 25%;
+    height: 25%;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px #dbdada;
+    padding-left: 30px;
+    padding-right: 30px;
+    color: #2E2E2E;
+    overflow: hidden;
+    padding-top: 2%;
+    padding-bottom:0.5%;
+    max-height: 180px;
+    animation: moveUp 0.2s ease forwards;
+    opacity: 0; 
+    transform: translateY(20px);
+}
+
+.modal-buttons{
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+
+.modal-buttons button{
+    border-radius: 7px;
+    border-style: none;
+    font-size: 15px;
+    font-weight: normal;
+    cursor: pointer;
+    width: 120px;
+    height: 50px;
+    box-shadow: 0px 0px 10px 0px #ebeaea;
+
+}
+
+.modal-buttons .remove-button{
+    background-color: #d13007;
+    color: #FDFAFA;
+}
+
+.modal-buttons .cancel-button{
+    color: #8f8f8f;
+}
+
+.modal-buttons .cancel-button i{
+    color: #8f8f8f;
+    font-size: 17px;
+    margin-right: 5px;
+}
+
+.modal-buttons .remove-button:hover{
+    background-color: #df5a39;
+}
+
+
+.modal-buttons .remove-button i{
+    color: #FDFAFA;
+    font-size: 17px;
+    margin-right: 5px;
+}
+
+.container-modal i{
+    color: #7dbb92;
+    font-size: 40px;
+}
+
+.container-modal p{
+    margin-top: 5%;
+    margin-bottom: 10%;
+}
