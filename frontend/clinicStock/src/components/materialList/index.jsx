@@ -75,7 +75,7 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit }) {
                             <input
                                 name="name"
                                 type="text"
-                                value={material.name}
+                                value={dados.name}
                                 maxLength={40}
                                 onChange={handleChange}
                             />
@@ -96,7 +96,7 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit }) {
                             <input
                                 name="amount"
                                 type="number"
-                                value={material.amount}
+                                value={dados.amount}
                                 className="input-amout"
                                 onChange={handleChange}
                             />
