@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react'
-import SideBar from "../../components/sideBar";
-import SearchField from "../../components/searchField";
-import AddItemButton from "../../components/addItemButton";
-import HeaderMaterial from "../../components/headerMaterial";
-import MaterialList from "../../components/materialList";
-import AddMaterialForm from "../../components/addMaterialForm";
+import SideBar from "../../components/sideBar/index.jsx";
+import SearchField from "../../components/searchField/index.jsx";
+import AddItemButton from "../../components/addItemButton/index.jsx";
+import HeaderMaterial from "../../components/headerMaterial/index.jsx";
+import MaterialList from "../../components/materialList/index.jsx";
+import AddMaterialForm from "../../components/addMaterialForm/index.jsx";
 import { getMaterials, addNewMaterial, editMaterial } from "../../services/api.js";
 
 import './style.css'
 
-function App() {
+const Materiais = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [addButton, setAddButton] = useState(false);
   const [materials, setMaterials] = useState([]);
@@ -74,4 +74,4 @@ function App() {
     </>
   )
 }
-export default App
+export default Materiais
