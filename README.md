@@ -3,8 +3,8 @@
 ClinicStock é uma aplicação para controle de estoque de materiais e medicamentos de uma clinica de saúde. \
 Realiza armazenamento de dados frequentes em cache para aumentar a performance reduzindo o tempo de resposta.
 
-![ClinicStock_Print](https://github.com/user-attachments/assets/20b9458e-96e8-4653-94c5-396b43f988f9)
 
+https://github.com/user-attachments/assets/9c5fab63-031e-4400-b207-06823bd1dd7f
 
 
 ## Tecnologias
