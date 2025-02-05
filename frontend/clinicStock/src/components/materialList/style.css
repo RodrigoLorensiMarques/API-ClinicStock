@@ -9,6 +9,9 @@
     align-items: center;
     gap: 10px;
     font-size: 15px;
+    animation: moveUp 0.5s ease forwards;
+    opacity: 0; 
+    transform: translateY(-20px);
 }
 
 .container-buttons{
@@ -89,3 +92,9 @@
     color: #5f5e5e;
 }
 
+@keyframes moveUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -4,6 +4,9 @@
     justify-content: space-between;
     padding: 5px;
     overflow: hidden;
+    animation: moveUp 0.5s ease forwards;
+    opacity: 0; 
+    transform: translateY(20px);
 }
 
 .form-container-input{
@@ -84,4 +87,11 @@ input::placeholder {
 
 .form-container-buttons button{
     color: #8f8f8f;
+}
+
+@keyframes moveUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
