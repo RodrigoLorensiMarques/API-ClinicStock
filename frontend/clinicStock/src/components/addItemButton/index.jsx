@@ -8,7 +8,7 @@ function AddItemButton({ item, setAddButton, addButton }) {
             <div className="add-item-button">
                 <button
                     onClick={() => setAddButton(true)}>
-                    <strong>+</strong> Add {item}
+                    <i class="fa-solid fa-plus"></i> Add {item}
                 </button>
             </div>
         )

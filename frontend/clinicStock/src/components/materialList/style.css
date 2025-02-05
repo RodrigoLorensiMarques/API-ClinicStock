@@ -15,7 +15,8 @@
     display: flex; 
     justify-content: space-between;
     align-items: center;
-    gap: 10px;  
+    gap: 15px; 
+    margin-right: 15px;
 }
 
 .item-list label{
@@ -42,7 +43,7 @@
 }
 
 .edit-icon{
-    color: #2E2E2E;
+    color: #8f8f8f;
     cursor: pointer;
     margin: 0px;
     padding: 0px;
@@ -53,10 +54,11 @@
 
 .trash-icon{
     cursor: pointer;
+    color: #8f8f8f;
     margin: 0px;
     padding: 0px;
     border: none;
-    height: 15px;
+    font-size: 15px;
     background-color: #FDFAFA;
 }
 
@@ -71,17 +73,19 @@
 }
 
 .input-amout{
-    width: 30%;
+    width: 20%;
 }
 
-.input-packaging{
-    width: 60%;
-}
 
 .select-type-edit{
     width: 110px;
     text-align: left;
     padding: 0px;
+    box-shadow: none;
 
+}
+
+.container-buttons button:hover{
+    color: #5f5e5e;
 }
 

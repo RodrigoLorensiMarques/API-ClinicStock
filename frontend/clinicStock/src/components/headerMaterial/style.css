@@ -1,7 +1,7 @@
 .header-material{
     background-color: #FDFAFA;
     padding: 15px;
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 20px 20px 0px 0px;
     color: #2E2E2E;
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr 0.8fr 0.4fr auto; 

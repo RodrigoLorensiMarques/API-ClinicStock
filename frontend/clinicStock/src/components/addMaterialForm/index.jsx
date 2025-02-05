@@ -69,12 +69,13 @@ function AddMaterialForm({ addButton, setAddButton, onAdd }) {
                 <div className="form-container-buttons">
                     <button
                         onClick={handleSubmit}
-                        className="add-button">+ Adicionar
+                        className="add-button">
+                        <i class="fa-solid fa-plus"></i> Adicionar
                     </button>
 
                     <button
                         onClick={() => { setAddButton(false) }}
-                        className="cancel-button">X Cancelar
+                        className="cancel-button"><i class="fa-solid fa-xmark"></i> Cancelar
                     </button>
                     
                 </div>

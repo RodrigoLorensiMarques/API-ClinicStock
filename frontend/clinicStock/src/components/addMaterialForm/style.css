@@ -2,6 +2,8 @@
     margin-bottom: 30px;
     display: flex;
     justify-content: space-between;
+    padding: 5px;
+    overflow: hidden;
 }
 
 .form-container-input{
@@ -26,7 +28,6 @@
 .form-container-buttons{
     display: flex;
     gap: 10px;
-    overflow: hidden;
 }
 
 .add-material-form input, select{
@@ -37,38 +38,50 @@
     padding: 10px 10px 10px 10px;
     font-size: 16px;
     outline: none;
+    box-shadow: 0px 0px 10px 0px #f0eeee;
 }
 
-.add-button{
-    width: 100px;
-    background-color: #A7CEB4;
+.form-container-buttons .add-button{
+    width: 120px;
+    height: 40px;
+    color: #FDFAFA;
+    background-color: #7dbb92;
+    box-shadow: 0px 0px 5px 0px #7dbb92;
 }
 
 .add-button:hover{
     background-color: #b4dfc2;
 }
 
-.cancel-button{
-    background-color: #DF7474;
-    width: 100px;
-}
-
 .cancel-button:hover{
-    background-color: #e48f8f;
+    background-color: #e6e3e3;
 }
 
 .form-container-buttons button{
-    border-radius: 5px;
-    color: #FDFAFA;
+    border-radius: 7px;
     border-style: none;
     font-size: 15px;
-    font-weight: bold;
+    font-weight: normal;
     cursor: pointer;
 }
-
 
 
 input::placeholder {
     color: #B7B7B7;
 }
 
+.form-container-buttons i{
+    font-size: 17px;
+    margin-right: 5px;
+}
+
+.cancel-button{
+    background-color: #FDFAFA;
+    width: 100px;
+    box-shadow: 0px 0px 5px 0px #e6e3e3;
+    width: 120px;
+}
+
+.form-container-buttons button{
+    color: #8f8f8f;
+}

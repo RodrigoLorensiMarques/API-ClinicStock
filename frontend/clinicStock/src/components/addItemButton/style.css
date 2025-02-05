@@ -1,18 +1,19 @@
 .add-item-button button{
-    border-radius: 5px;
+    border-radius: 10px;
     height: 50px;
-    width: 130px;
+    width: 140px;
     color: #FDFAFA;
-    background-color: #A7CEB4;
+    background-color: #7dbb92;
     border-style: none;
     font-size: 15px;
-    font-weight: bold;
+    font-weight: normal;
     cursor: pointer;
-
+    box-shadow: 0px 0px 15px 0px #ccf1d9;
 }
 
-.add-item-button button strong{
-    font-size: 25px;
+.add-item-button button i{
+    font-size: 19px;
+    margin-right: 5px;
 }
 
 .add-item-button button:hover{
