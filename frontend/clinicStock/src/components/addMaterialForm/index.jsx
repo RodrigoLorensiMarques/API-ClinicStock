@@ -6,6 +6,15 @@ import './style.css'
 
 function AddMaterialForm({ addButton, setAddButton, onAdd }) {
     const [dados, setDados] = useState({ name: "", packaging: "", amount: "" })   
+    const[isVisible, setIsVisible] = useState(addButton)
+    
+    useEffect(() => {
+        if (!addButton) {
+            setTimeout(() => setIsVisible(false), 200);
+        } else {
+            setIsVisible(true)
+        }
+    }, [addButton]);
     
     const handleChange = (e) => {
         setDados({ ...dados, [e.target.name]: e.target.value });
@@ -30,10 +39,10 @@ function AddMaterialForm({ addButton, setAddButton, onAdd }) {
     };
     
 
-    if (addButton)
-    {
+    if (!isVisible) return null;
+    
         return (
-            <div class="add-material-form">
+            <div className={`add-material-form ${!addButton ? "moveOut" : "moveUp"}`}>
                 <div className="form-container-input">
                     <input
                         className="input-name"
@@ -82,6 +91,6 @@ function AddMaterialForm({ addButton, setAddButton, onAdd }) {
     
             </div>  
         )
-    }
+    
 }
   export default AddMaterialForm;
