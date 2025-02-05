@@ -100,7 +100,7 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit }) {
                                     <i class="fa-solid fa-check"></i>
                                 </button>
                                 <button
-                                    onClick={() => hendleDelete(material.id)}
+                                    onClick={() => setOpenModalDelete(material.id)}
                                     className="trash-icon">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
