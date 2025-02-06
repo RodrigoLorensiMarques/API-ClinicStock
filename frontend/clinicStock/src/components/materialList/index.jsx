@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toastSuccessful } from "../../utils/toastUtils.js"
 import ConfirmModal from "../confirmModal"
+import EmptyStateList from "../emptyStateList/index.jsx"
 import './style.css'
 
 
@@ -56,68 +57,55 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit }) {
     );
 
 
+    if (materials.length <1) {
+        return (
+            <div>
+                <EmptyStateList />
+            </div>
+        )
+    }
 
-
-    return (
-        <div>
-            {filteredMaterials.map((material) => (
-                <div>
-                    {editingId === material.id ? (
-                        <div className="item-list">
-                            <input
-                                name="name"
-                                type="text"
-                                value={dados.name}
-                                maxLength={40}
-                                onChange={handleChange}
-                            />
-                            <label>#{material.id}</label>
-
-                            <select
-                                className="select-type-edit"
-                                name="packaging"
-                                value={dados.packaging}
-                                onChange={handleChange}>
-                                
-                                <option value="Unidade">Unidade</option>
-                                <option value="Rolo">Rolo</option>
-                                <option value="Pacote">Pacote</option>
-                                <option value="Caixa">Caixa</option>
-                            </select>
-
-                            <input
-                                name="amount"
-                                type="number"
-                                value={dados.amount}
-                                className="input-amout"
-                                onChange={handleChange}
-                            />
+    else {
+        return (
+            <div>
+                {filteredMaterials.map((material) => (
+                    <div>
+                        {editingId === material.id ? (
+                            <div className="item-list">
+                                <input
+                                    name="name"
+                                    type="text"
+                                    value={dados.name}
+                                    maxLength={40}
+                                    onChange={handleChange}
+                                />
+                                <label>#{material.id}</label>
     
-                            <div className="container-buttons">
-                                <button
-                                    onClick={() => handleClickCheck(material.id)}
-                                    className="check-icon">
-                                    <i class="fa-solid fa-check"></i>
-                                </button>
-                                <button
-                                    onClick={() => setOpenModalDelete(material.id)}
-                                    className="trash-icon">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-                    ) : (
-                        <div className="item-list">
-                            <label><strong>{material.name}</strong></label>
-                            <label>#{material.id}</label>
-                            <label>{material.packaging}</label>
-                            <label>{material.amount}</label>
+                                <select
+                                    className="select-type-edit"
+                                    name="packaging"
+                                    value={dados.packaging}
+                                    onChange={handleChange}>
+                                    
+                                    <option value="Unidade">Unidade</option>
+                                    <option value="Rolo">Rolo</option>
+                                    <option value="Pacote">Pacote</option>
+                                    <option value="Caixa">Caixa</option>
+                                </select>
+    
+                                <input
+                                    name="amount"
+                                    type="number"
+                                    value={dados.amount}
+                                    className="input-amout"
+                                    onChange={handleChange}
+                                />
         
-                            <div className="container-buttons">
+                                <div className="container-buttons">
                                     <button
-                                        onClick={() => setEditingId(material.id)}
-                                        className="edit-icon">
-                                        <i class="fa-solid fa-pen-to-square"></i>
+                                        onClick={() => handleClickCheck(material.id)}
+                                        className="check-icon">
+                                        <i class="fa-solid fa-check"></i>
                                     </button>
                                     <button
                                         onClick={() => setOpenModalDelete(material.id)}
@@ -125,14 +113,38 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit }) {
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </div>
-                                
-                            </div>   
-                        )}
-                </div>
-            ))}  
-            <ConfirmModal loadMaterials={loadMaterials} isOpen={openModalDelete} setOpenModalDelete={setOpenModalDelete}/>
-            <ToastContainer />
-        </div>
-    )
+                            </div>
+                        ) : (
+                            <div className="item-list">
+                                <label><strong>{material.name}</strong></label>
+                                <label>#{material.id}</label>
+                                <label>{material.packaging}</label>
+                                <label>{material.amount}</label>
+            
+                                <div className="container-buttons">
+                                        <button
+                                            onClick={() => setEditingId(material.id)}
+                                            className="edit-icon">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                        <button
+                                            onClick={() => setOpenModalDelete(material.id)}
+                                            className="trash-icon">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                    
+                                </div>   
+                            )}
+                    </div>
+                ))}  
+                <ConfirmModal loadMaterials={loadMaterials} isOpen={openModalDelete} setOpenModalDelete={setOpenModalDelete}/>
+                <ToastContainer />
+            </div>
+        )
+    }
+
+
+    
 }
   export default MaterialList;
