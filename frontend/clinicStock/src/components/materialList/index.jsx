@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toastSuccessful } from "../../utils/toastUtils.js"
 import ConfirmModal from "../confirmModal"
 import EmptyStateList from "../emptyStateList/index.jsx"
+import EmptyStateSearch from "../emptyStateSearch/index.jsx"
 import './style.css'
 
 
@@ -57,12 +58,12 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit }) {
     );
 
 
-    if (materials.length <1) {
-        return (
-            <div>
-                <EmptyStateList />
-            </div>
-        )
+    if (materials.length === 0) {
+        return <EmptyStateList />;
+    }
+    
+    if (filteredMaterials.length === 0) {
+        return <EmptyStateSearch searchTerm={ searchTerm} />;
     }
 
     else {
