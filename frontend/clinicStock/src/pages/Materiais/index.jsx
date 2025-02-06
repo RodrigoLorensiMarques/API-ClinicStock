@@ -5,6 +5,7 @@ import AddItemButton from "../../components/addItemButton/index.jsx";
 import HeaderMaterial from "../../components/headerMaterial/index.jsx";
 import MaterialList from "../../components/materialList/index.jsx";
 import AddMaterialForm from "../../components/addMaterialForm/index.jsx";
+import Footer from "../../components/footer/index.jsx";
 import { getMaterials, addNewMaterial, editMaterial } from "../../services/api.js";
 
 import './style.css'
@@ -55,21 +56,23 @@ const Materiais = () => {
   return (
     <>
       <div className="parent-container">
-          <div className='container-SideBar'>
+        <div className='container-SideBar'>
             <SideBar />
-          </div>
-          <div className="dashboard-control">
+        </div>
+        <div className='content-container'>
+            <div className="dashboard-control">
               <SearchField setSearchTerm={setSearchTerm} />
               <div className="dashboard-content">
                   <h1>Material</h1>
-            <AddItemButton item="Material" setAddButton={setAddButton} addButton={addButton}/>
+                  <AddItemButton item="Material" setAddButton={setAddButton} addButton={addButton}/>
               </div>
-              <div className="dashboard-itemns">
+              <div className="dashboard-items">
                   <AddMaterialForm addButton={addButton} setAddButton={setAddButton} onAdd={handleAddMaterial}/>
                   <HeaderMaterial />
-                  <MaterialList searchTerm={searchTerm} materials={materials} loadMaterials={loadMaterials} onEdit={handleEditMaterial}/>
+                  <MaterialList searchTerm={searchTerm} materials={materials} loadMaterials={loadMaterials} onEdit={handleEditMaterial} />
               </div>
-          </div>
+            </div> 
+        </div>
       </div>
     </>
   )
