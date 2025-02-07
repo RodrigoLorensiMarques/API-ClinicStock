@@ -6,6 +6,8 @@ import { toastSuccessful } from "../../utils/toastUtils.js"
 import ConfirmModal from "../confirmModal"
 import EmptyStateList from "../emptyStateList/index.jsx"
 import EmptyStateSearch from "../emptyStateSearch/index.jsx"
+import TypeOptionsMaterials from "../typeOptionsMaterials/"
+import TypeOptionsMedicines from "../typeOptionsMedicines/"
 import './style.css'
 
 
@@ -80,7 +82,19 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit, itemReques
                                     onChange={handleChange}
                                 />
                                 <label>#{material.id}</label>
-                                {itemRequest === "Medicine" ? (<label>{material.milligram}</label>) : null}
+
+
+
+                                {itemRequest === "Medicine" ?
+                                    <input
+                                        className="input-milligram"
+                                        type="number"
+                                        placeholder="mg"
+                                        name="milligram"
+                                        value={dados.milligram}
+                                        onChange={handleChange}
+                                    /> : null}
+
     
                                 <select
                                     className="select-type-edit"
@@ -88,10 +102,7 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit, itemReques
                                     value={dados.packaging}
                                     onChange={handleChange}>
                                     
-                                    <option value="Unidade">Unidade</option>
-                                    <option value="Rolo">Rolo</option>
-                                    <option value="Pacote">Pacote</option>
-                                    <option value="Caixa">Caixa</option>
+                                    {itemRequest === "Medicine" ? <TypeOptionsMedicines /> : <TypeOptionsMaterials />}
                                 </select>
     
                                 <input
