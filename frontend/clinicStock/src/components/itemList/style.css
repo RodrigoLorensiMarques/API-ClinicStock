@@ -74,8 +74,19 @@
 }
 
 .check-icon{
-    color: #2E2E2E;
+    color: #8f8f8f;
     cursor: pointer;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    font-size: 15px;
+    background-color: #FDFAFA;
+}
+
+
+.cancel-icon{
+    cursor: pointer;
+    color: #8f8f8f;
     margin: 0px;
     padding: 0px;
     border: none;

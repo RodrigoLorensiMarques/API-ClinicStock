@@ -115,10 +115,11 @@ function ItemList({ searchTerm, items, loadItems, onEdit, itemRequest }) {
                                         className="check-icon">
                                         <i class="fa-solid fa-check"></i>
                                     </button>
+                                    
                                     <button
-                                        onClick={() => setOpenModalDelete(item.id)}
-                                        className="trash-icon">
-                                        <i class="fa-solid fa-trash"></i>
+                                        onClick={() => setEditingId(false)}
+                                        className="cancel-icon">
+                                        <i class="fa-solid fa-xmark"></i>
                                     </button>
                                 </div>
                             </div>
