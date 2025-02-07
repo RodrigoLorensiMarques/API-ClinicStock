@@ -6,6 +6,10 @@ Realiza armazenamento de dados frequentes em cache para aumentar a performance r
 
 https://github.com/user-attachments/assets/9c5fab63-031e-4400-b207-06823bd1dd7f
 
+![empty](https://github.com/user-attachments/assets/5dd0d622-ebcd-4a1c-826b-15ed1919e4f3)
+
+
+
 
 ## Tecnologias
 - C# .NET
