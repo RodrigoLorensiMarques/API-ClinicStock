@@ -1,4 +1,4 @@
-.header-material{
+.header-list{
     background-color: #FDFAFA;
     padding: 15px;
     border-radius: 20px 20px 0px 0px;
@@ -9,3 +9,10 @@
     font-size: 15px;
 }
 
+#header-medicine{
+    grid-template-columns: 1.5fr 1fr 1fr 0.8fr 0.4fr 1fr auto; 
+}
+
+#header-material{
+    grid-template-columns: 1.5fr 1fr 1fr 0.8fr 0.4fr auto; 
+}

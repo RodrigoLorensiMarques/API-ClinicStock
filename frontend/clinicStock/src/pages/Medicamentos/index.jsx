@@ -70,7 +70,7 @@ const Medicamentos = () => {
               </div>
               <div className="dashboard-items">
                   <AddMaterialForm addButton={addButton} setAddButton={setAddButton} onAdd={handleAddMaterial}/>
-                  <HeaderMaterial />
+                  <HeaderMaterial item={itemRequest} />
                   <MaterialList searchTerm={searchTerm} materials={materials} loadMaterials={loadMaterials} onEdit={handleEditMaterial} itemRequest={itemRequest}/>
               </div>
             </div> 

@@ -11,7 +11,7 @@ import './style.css'
 
 function MaterialList({ searchTerm, materials, loadMaterials, onEdit, itemRequest }) {
     const [editingId, setEditingId] = useState(false);
-    const [dados, setDados] = useState({ name: "", packaging: "", amount: "" }) 
+    const [dados, setDados] = useState({ name: "", packaging: "", milligram:"", amount: "" }) 
     const [openModalDelete, setOpenModalDelete] = useState(null);
 
     useEffect(() => {
@@ -71,7 +71,7 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit, itemReques
                 {filteredMaterials.map((material) => (
                     <div>
                         {editingId === material.id ? (
-                            <div className="item-list">
+                             <div className= "item-list" id={`${itemRequest === "Medicine" ? "item-medicine" : "item-material"}`}>
                                 <input
                                     name="name"
                                     type="text"
@@ -80,6 +80,7 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit, itemReques
                                     onChange={handleChange}
                                 />
                                 <label>#{material.id}</label>
+                                {itemRequest === "Medicine" ? (<label>{material.milligram}</label>) : null}
     
                                 <select
                                     className="select-type-edit"
@@ -115,9 +116,10 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit, itemReques
                                 </div>
                             </div>
                         ) : (
-                            <div className="item-list">
+                            <div className= "item-list" id={`${itemRequest === "Medicine" ? "item-medicine" : "item-material"}`}>
                                 <label><strong>{material.name}</strong></label>
                                 <label>#{material.id}</label>
+                                {itemRequest === "Medicine" ? (<label>{material.milligram}</label>) : null}
                                 <label>{material.packaging}</label>
                                 <label>{material.amount}</label>
             
