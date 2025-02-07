@@ -1,4 +1,4 @@
-import { deleteMaterial } from "../../services/api.js";
+import { deleteItem } from "../../services/api.js";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {toastSuccessful} from "../../utils/toastUtils.js"
@@ -7,11 +7,11 @@ import './style.css'
 
 
 
-function ConfirmModal({loadMaterials, isOpen, setOpenModalDelete}) {
+function ConfirmModal({loadMaterials, isOpen, setOpenModalDelete, itemRequest}) {
 
     const handleDelete = async () => {
         try {
-            await deleteMaterial(isOpen);
+            await deleteItem(itemRequest, isOpen);
             toastSuccessful("Item removido com sucesso!");
             setOpenModalDelete(false);
             loadMaterials();

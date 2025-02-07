@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { data } from 'react-router-dom';
 
-const API_URL = "http://localhost:5124/Material/" 
+const API_URL = "http://localhost:5124/" 
 
-export const getMaterials = async () => {
+export const getItems = async (itemRequest) => {
     try {
-        const response = await axios.get(API_URL+"GetAll");
+        const response = await axios.get(API_URL + itemRequest + "/GetAll");
         return response.data;
     } catch (error) {
         throw new Error(error.massage);
@@ -13,17 +14,17 @@ export const getMaterials = async () => {
 };
 
 
-export const deleteMaterial = async (id) => {
+export const deleteItem = async (itemRequest,id) => {
     try {
-        await axios.delete(`${API_URL}${id}`);
+        await axios.delete(`${API_URL+itemRequest}/${id}`);
    } catch (error) {
         console.log("Error", error);
     }
 }
 
-export const addNewMaterial = async (dados) => {
+export const addNewItem = async (itemRequest, dados) => {
     try {
-        const result = await axios.post(API_URL, dados);
+        const result = await axios.post(API_URL + itemRequest, dados);
 
         if (result.status === 200) {
             return { success: true, data: result };
@@ -36,9 +37,9 @@ export const addNewMaterial = async (dados) => {
     }
 }
 
-export const editMaterial = async (id, dados) => {
+export const editItem = async (itemRequest, id, dados) => {
     try {
-        await axios.put(`${API_URL}?id=${id}`, dados);
+        await axios.put(`${API_URL + itemRequest}?id=${id}`, dados);
         
    } catch (error) {
         console.log("Error", error);

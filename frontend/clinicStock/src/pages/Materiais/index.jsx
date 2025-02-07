@@ -6,7 +6,7 @@ import HeaderMaterial from "../../components/headerMaterial/index.jsx";
 import MaterialList from "../../components/materialList/index.jsx";
 import AddMaterialForm from "../../components/addMaterialForm/index.jsx";
 import Footer from "../../components/footer/index.jsx";
-import { getMaterials, addNewMaterial, editMaterial } from "../../services/api.js";
+import { getItems, addNewItem, editItem } from "../../services/api.js";
 
 import './style.css'
 
@@ -14,10 +14,11 @@ const Materiais = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [addButton, setAddButton] = useState(false);
   const [materials, setMaterials] = useState([]);
+  const itemRequest = "Material"
 
   const loadMaterials = async () => {
       try {
-          const data = await getMaterials();
+          const data = await getItems(itemRequest);
           setMaterials(data);
       } catch (error) {
           setErro(error.message);
@@ -27,7 +28,7 @@ const Materiais = () => {
   const handleAddMaterial  = async (dados) => {
 
     try {
-        const response = await addNewMaterial(dados);
+        const response = await addNewItem(itemRequest,dados);
       
         if (response && response.success) {
             setMaterials((prevMaterials) => [...prevMaterials, dados]);
@@ -44,7 +45,7 @@ const Materiais = () => {
   }
 
   const handleEditMaterial = async (id, dados) => {
-    await editMaterial(id, dados);
+    await editItem(itemRequest,id, dados);
     loadMaterials();
   }
   
@@ -69,7 +70,7 @@ const Materiais = () => {
               <div className="dashboard-items">
                   <AddMaterialForm addButton={addButton} setAddButton={setAddButton} onAdd={handleAddMaterial}/>
                   <HeaderMaterial />
-                  <MaterialList searchTerm={searchTerm} materials={materials} loadMaterials={loadMaterials} onEdit={handleEditMaterial} />
+                  <MaterialList searchTerm={searchTerm} materials={materials} loadMaterials={loadMaterials} onEdit={handleEditMaterial} itemRequest={itemRequest}/>
               </div>
             </div> 
         </div>

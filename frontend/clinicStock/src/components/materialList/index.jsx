@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import {deleteMaterial} from "../../services/api.js";
 import trashIcon from "../../assets/trash.svg" 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,7 +9,7 @@ import EmptyStateSearch from "../emptyStateSearch/index.jsx"
 import './style.css'
 
 
-function MaterialList({ searchTerm, materials, loadMaterials, onEdit }) {
+function MaterialList({ searchTerm, materials, loadMaterials, onEdit, itemRequest }) {
     const [editingId, setEditingId] = useState(false);
     const [dados, setDados] = useState({ name: "", packaging: "", amount: "" }) 
     const [openModalDelete, setOpenModalDelete] = useState(null);
@@ -139,7 +138,7 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit }) {
                             )}
                     </div>
                 ))}  
-                <ConfirmModal loadMaterials={loadMaterials} isOpen={openModalDelete} setOpenModalDelete={setOpenModalDelete}/>
+                <ConfirmModal loadMaterials={loadMaterials} isOpen={openModalDelete} setOpenModalDelete={setOpenModalDelete} itemRequest={itemRequest} />
                 <ToastContainer />
             </div>
         )

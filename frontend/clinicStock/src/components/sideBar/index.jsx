@@ -18,7 +18,7 @@ function SideBar() {
             <div class="content-sideBar">
                 <h1>ClinicStock</h1>
                 <div className="links-items">
-                    <Link>
+                    <Link to="/">
                         <img
                             className="healingIcon"
                             src={healingIcon} draggable="false" />

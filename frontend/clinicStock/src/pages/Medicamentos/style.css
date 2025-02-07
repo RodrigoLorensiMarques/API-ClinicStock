@@ -1,0 +1,51 @@
+body {
+    background-color: #F6F5F5;
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", serif;
+    display: flex;
+}
+
+.parent-container {
+    display: flex;
+    width: 95vw;
+}
+
+
+.dashboard-control{
+    margin-top: 80px;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.dashboard-content{
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard-content h1{
+
+    font-size: 30px;
+    color: #2E2E2E;
+}
+
+
+.dashboard-items{
+    width: 90%;
+    margin-left: 5%;
+}
+
+.content-sideBar{
+    height: 100vh;
+}
+
+
+.content-container{
+    width: 100%;
+}
+
+
