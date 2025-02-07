@@ -5,11 +5,11 @@ function TypeOptionsMaterials() {
     
     return (
         <>
-        
-        <option value="Unidade">Unidade</option>
-        <option value="Rolo">Rolo</option>
-        <option value="Pacote">Pacote</option>
-        <option value="Caixa">Caixa</option>
+            <option value="Unidade">Unidade</option>
+            <option value="Rolo">Rolo</option>
+            <option value="Pacote">Pacote</option>
+            <option value="Caixa">Caixa</option>
+            <option value="Tubo">Tubo</option>
         </>
     )
 }

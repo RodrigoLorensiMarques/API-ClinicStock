@@ -7,8 +7,8 @@ import TypeOptionsMedicines from "../typeOptionsMedicines/index.jsx"
 import './style.css'
 
 function AddItemForm({ addButton, setAddButton, onAdd, itemRequest}) {
-    const [dados, setDados] = useState({ name: "", milligram: "", packaging: "", amount: "" })   
-    const[isVisible, setIsVisible] = useState(addButton)
+    const [dados, setDados] = useState({ name: "", milligram: "", packaging: "Unidade", amount: "" })   
+    const [isVisible, setIsVisible] = useState(addButton)
     
     useEffect(() => {
         if (!addButton) {
@@ -25,6 +25,7 @@ function AddItemForm({ addButton, setAddButton, onAdd, itemRequest}) {
     const handleSubmit = async () => {
         try {
             const response = await onAdd(dados);
+            setDados({ name: "", milligram: "", packaging: "Unidade", amount: "" });
             console.log(response);
     
 
@@ -50,36 +51,35 @@ function AddItemForm({ addButton, setAddButton, onAdd, itemRequest}) {
                         className="input-name"
                         type="text" placeholder="Nome"
                         maxLength={40}
-                        name="name"
                         value={dados.name}
+                        name="name"
                         onChange={handleChange}
                     />
-                    <select
+                    <select 
                         className="select-type"
                         name="packaging"
-                        value={dados.packaging}
                         onChange={handleChange}>
                         
                         {itemRequest === "Medicine" ? <TypeOptionsMedicines /> : <TypeOptionsMaterials />}
+
                     </select>
 
                     {itemRequest === "Medicine" ?
                         <input
                             className="input-milligram"
                             type="number"
+                            value={dados.milligram}
                             placeholder="mg"
                             name="milligram"
-                            value={dados.milligram}
                             onChange={handleChange}
                         /> : null}
-
 
                     <input
                         className="input-amount"
                         type="number"
                         placeholder="Qtd"
-                        name="amount"
                         value={dados.amount}
+                        name="amount"
                         onChange={handleChange}
                     />
                 </div>
@@ -95,9 +95,7 @@ function AddItemForm({ addButton, setAddButton, onAdd, itemRequest}) {
                         onClick={() => { setAddButton(false) }}
                         className="cancel-button"><i class="fa-solid fa-xmark"></i> Cancelar
                     </button>
-                    
                 </div>
-    
             </div>  
         )
     

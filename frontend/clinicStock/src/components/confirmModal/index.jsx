@@ -35,8 +35,7 @@ function ConfirmModal({loadItems, isOpen, setOpenModalDelete, itemRequest}) {
                         <button className="cancel-button" onClick={()=>setOpenModalDelete(false) } > <i class="fa-solid fa-xmark"></i>Cancelar</button>    
                     </div>
                 </div>
-            </div>
-            
+            </div> 
         )
     }
 }

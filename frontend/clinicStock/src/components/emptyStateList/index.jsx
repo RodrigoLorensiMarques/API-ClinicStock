@@ -16,7 +16,5 @@ function EmptyStateList({ itemRequest }) {
             />
         </div>
     )
-    
-  
 }
   export default EmptyStateList;
