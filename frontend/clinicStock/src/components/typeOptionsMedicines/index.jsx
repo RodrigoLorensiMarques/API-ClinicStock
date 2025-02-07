@@ -6,7 +6,7 @@ function TypeOptionsMedicines() {
     return (
         <>
         <option value="Unidade">Unidade</option>
-        <option value="Rolo">Ampola</option>
+        <option value="Ampola">Ampola</option>
         <option value="Caixa">Caixa</option>
         </>
     )

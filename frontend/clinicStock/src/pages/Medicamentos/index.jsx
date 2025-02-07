@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react'
 import SideBar from "../../components/sideBar/index.jsx";
 import SearchField from "../../components/searchField/index.jsx";
 import AddItemButton from "../../components/addItemButton/index.jsx";
-import HeaderMaterial from "../../components/headerMaterial/index.jsx";
-import MaterialList from "../../components/materialList/index.jsx";
-import AddMaterialForm from "../../components/addMaterialForm/index.jsx";
+import HeaderItem from "../../components/headerItem/index.jsx";
+import ItemList from "../../components/itemList/index.jsx";
+import AddItemForm from "../../components/addItemForm/index.jsx";
 import Footer from "../../components/footer/index.jsx";
 import { getItems, addNewItem, editItem } from "../../services/api.js";
 
@@ -13,27 +13,27 @@ import './style.css'
 const Medicamentos = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [addButton, setAddButton] = useState(false);
-  const [materials, setMaterials] = useState([]);
+  const [items, setItems] = useState([]);
 
   const itemRequest = "Medicine";
 
-  const loadMaterials = async () => {
+  const loadItems = async () => {
       try {
           const data = await getItems(itemRequest);
-          setMaterials(data);
+          setItems(data);
       } catch (error) {
           setErro(error.message);
       }
   };
 
-  const handleAddMaterial  = async (dados) => {
+  const handleAddItem  = async (dados) => {
 
     try {
         const response = await addNewItem(itemRequest,dados);
       
         if (response && response.success) {
-            setMaterials((prevMaterials) => [...prevMaterials, dados]);
-            loadMaterials();
+            setItems((prevItems) => [...prevItems, dados]);
+            loadItems();
           return { success: true };
         } 
         else {
@@ -45,13 +45,13 @@ const Medicamentos = () => {
     }
   }
 
-  const handleEditMaterial = async (id, dados) => {
+  const handleEditItem = async (id, dados) => {
     await editItem(itemRequest,id, dados);
-    loadMaterials();
+    loadItems();
   }
   
   useEffect(() => {
-    loadMaterials();
+    loadItems();
   }, []);
 
 
@@ -66,12 +66,12 @@ const Medicamentos = () => {
               <SearchField setSearchTerm={setSearchTerm} />
               <div className="dashboard-content">
                   <h1>Medicamentos</h1>
-                  <AddItemButton item="Medicamento" setAddButton={setAddButton} addButton={addButton}/>
+                  <AddItemButton itemRequest="Medicamento" setAddButton={setAddButton} addButton={addButton}/>
               </div>
               <div className="dashboard-items">
-                  <AddMaterialForm addButton={addButton} setAddButton={setAddButton} onAdd={handleAddMaterial} item={itemRequest}/>
-                  <HeaderMaterial item={itemRequest} />
-                  <MaterialList searchTerm={searchTerm} materials={materials} loadMaterials={loadMaterials} onEdit={handleEditMaterial} itemRequest={itemRequest}/>
+                  <AddItemForm addButton={addButton} setAddButton={setAddButton} onAdd={handleAddItem} itemRequest={itemRequest}/>
+                  <HeaderItem item={itemRequest} />
+                  <ItemList searchTerm={searchTerm} items={items} loadItems={loadItems} onEdit={handleEditItem} itemRequest={itemRequest}/>
               </div>
             </div> 
         </div>

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react"
 import "react-toastify/dist/ReactToastify.css";
 import { toastSuccessful, toastError } from "../../utils/toastUtils.js"
-import TypeOptionsMaterials from "../typeOptionsMaterials/"
-import TypeOptionsMedicines from "../typeOptionsMedicines/"
+import TypeOptionsMaterials from "../typeOptionsMaterials/index.jsx"
+import TypeOptionsMedicines from "../typeOptionsMedicines/index.jsx"
 
 import './style.css'
 
-function AddMaterialForm({ addButton, setAddButton, onAdd, item}) {
+function AddItemForm({ addButton, setAddButton, onAdd, itemRequest}) {
     const [dados, setDados] = useState({ name: "", milligram: "", packaging: "", amount: "" })   
     const[isVisible, setIsVisible] = useState(addButton)
     
@@ -60,10 +60,10 @@ function AddMaterialForm({ addButton, setAddButton, onAdd, item}) {
                         value={dados.packaging}
                         onChange={handleChange}>
                         
-                        {item === "Medicine" ? <TypeOptionsMedicines /> : <TypeOptionsMaterials />}
+                        {itemRequest === "Medicine" ? <TypeOptionsMedicines /> : <TypeOptionsMaterials />}
                     </select>
 
-                    {item === "Medicine" ?
+                    {itemRequest === "Medicine" ?
                         <input
                             className="input-milligram"
                             type="number"
@@ -102,4 +102,4 @@ function AddMaterialForm({ addButton, setAddButton, onAdd, item}) {
         )
     
 }
-  export default AddMaterialForm;
+  export default AddItemForm;

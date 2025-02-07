@@ -7,14 +7,14 @@ import './style.css'
 
 
 
-function ConfirmModal({loadMaterials, isOpen, setOpenModalDelete, itemRequest}) {
+function ConfirmModal({loadItems, isOpen, setOpenModalDelete, itemRequest}) {
 
     const handleDelete = async () => {
         try {
             await deleteItem(itemRequest, isOpen);
             toastSuccessful("Item removido com sucesso!");
             setOpenModalDelete(false);
-            loadMaterials();
+            loadItems();
             
         }
         catch (error) {

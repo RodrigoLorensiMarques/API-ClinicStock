@@ -1,34 +1,34 @@
 import React, { useState, useEffect } from "react"
-import trashIcon from "../../assets/trash.svg" 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toastSuccessful } from "../../utils/toastUtils.js"
-import ConfirmModal from "../confirmModal"
+import ConfirmModal from "../confirmModal/index.jsx"
 import EmptyStateList from "../emptyStateList/index.jsx"
 import EmptyStateSearch from "../emptyStateSearch/index.jsx"
-import TypeOptionsMaterials from "../typeOptionsMaterials/"
-import TypeOptionsMedicines from "../typeOptionsMedicines/"
+import TypeOptionsMaterials from "../typeOptionsMaterials/index.jsx"
+import TypeOptionsMedicines from "../typeOptionsMedicines/index.jsx"
 import './style.css'
 
 
-function MaterialList({ searchTerm, materials, loadMaterials, onEdit, itemRequest }) {
+function ItemList({ searchTerm, items, loadItems, onEdit, itemRequest }) {
     const [editingId, setEditingId] = useState(false);
     const [dados, setDados] = useState({ name: "", packaging: "", milligram:"", amount: "" }) 
     const [openModalDelete, setOpenModalDelete] = useState(null);
 
     useEffect(() => {
         if (editingId) {
-            const materialToEdit = materials.find(material => material.id === editingId);
+            const itemToEdit = items.find(item => item.id === editingId);
 
-            if (materialToEdit) {
+            if (itemToEdit) {
                 setDados({
-                    name: materialToEdit.name,
-                    packaging: materialToEdit.packaging,
-                    amount: materialToEdit.amount
+                    name: itemToEdit.name,
+                    packaging: itemToEdit.packaging,
+                    milligram: itemToEdit.milligram,
+                    amount: itemToEdit.amount
                 });
             }
         }
-    }, [editingId, materials]);
+    }, [editingId, items]);
     
 
     const handleChange = (e) => {
@@ -52,27 +52,26 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit, itemReques
     
 
 
-
-    const filteredMaterials = materials.filter(material =>
-        material.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (`#`+material.id.toString()).includes(searchTerm)
+    const filteredItems = items.filter(item =>
+        item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (`#`+item.id.toString()).includes(searchTerm)
     );
 
 
-    if (materials.length === 0) {
-        return <EmptyStateList />;
+    if (items.length === 0) {
+        return <EmptyStateList itemRequest={itemRequest}/>;
     }
     
-    if (filteredMaterials.length === 0) {
-        return <EmptyStateSearch searchTerm={ searchTerm} />;
+    if (filteredItems.length === 0) {
+        return <EmptyStateSearch searchTerm={ searchTerm} itemRequest={itemRequest}/>;
     }
 
     else {
         return (
             <div>
-                {filteredMaterials.map((material) => (
+                {filteredItems.map((item) => (
                     <div>
-                        {editingId === material.id ? (
+                        {editingId === item.id ? (
                              <div className= "item-list" id={`${itemRequest === "Medicine" ? "item-medicine" : "item-material"}`}>
                                 <input
                                     name="name"
@@ -81,20 +80,17 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit, itemReques
                                     maxLength={40}
                                     onChange={handleChange}
                                 />
-                                <label>#{material.id}</label>
-
-
+                                <label>#{item.id}</label>
 
                                 {itemRequest === "Medicine" ?
                                     <input
+                                        name="milligram"
                                         className="input-milligram"
                                         type="number"
                                         placeholder="mg"
-                                        name="milligram"
                                         value={dados.milligram}
                                         onChange={handleChange}
                                     /> : null}
-
     
                                 <select
                                     className="select-type-edit"
@@ -115,12 +111,12 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit, itemReques
         
                                 <div className="container-buttons">
                                     <button
-                                        onClick={() => handleClickCheck(material.id)}
+                                        onClick={() => handleClickCheck(item.id)}
                                         className="check-icon">
                                         <i class="fa-solid fa-check"></i>
                                     </button>
                                     <button
-                                        onClick={() => setOpenModalDelete(material.id)}
+                                        onClick={() => setOpenModalDelete(item.id)}
                                         className="trash-icon">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
@@ -128,20 +124,20 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit, itemReques
                             </div>
                         ) : (
                             <div className= "item-list" id={`${itemRequest === "Medicine" ? "item-medicine" : "item-material"}`}>
-                                <label><strong>{material.name}</strong></label>
-                                <label>#{material.id}</label>
-                                {itemRequest === "Medicine" ? (<label>{material.milligram}</label>) : null}
-                                <label>{material.packaging}</label>
-                                <label>{material.amount}</label>
+                                <label><strong>{item.name}</strong></label>
+                                <label>#{item.id}</label>
+                                {itemRequest === "Medicine" ? (<label>{item.milligram}</label>) : null}
+                                <label>{item.packaging}</label>
+                                <label>{item.amount}</label>
             
                                 <div className="container-buttons">
                                         <button
-                                            onClick={() => setEditingId(material.id)}
+                                            onClick={() => setEditingId(item.id)}
                                             className="edit-icon">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </button>
                                         <button
-                                            onClick={() => setOpenModalDelete(material.id)}
+                                            onClick={() => setOpenModalDelete(item.id)}
                                             className="trash-icon">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
@@ -151,7 +147,7 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit, itemReques
                             )}
                     </div>
                 ))}  
-                <ConfirmModal loadMaterials={loadMaterials} isOpen={openModalDelete} setOpenModalDelete={setOpenModalDelete} itemRequest={itemRequest} />
+                <ConfirmModal loadItems={loadItems} isOpen={openModalDelete} setOpenModalDelete={setOpenModalDelete} itemRequest={itemRequest} />
                 <ToastContainer />
             </div>
         )
@@ -160,4 +156,4 @@ function MaterialList({ searchTerm, materials, loadMaterials, onEdit, itemReques
 
     
 }
-  export default MaterialList;
+  export default ItemList;
